@@ -1,18 +1,113 @@
-<ion-menu type="push" side="start" menuId="first" class="app-menu" contentId="main">
-  <ion-header>
-    <ion-toolbar color="primary">
-      <ion-title>Start Menu</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-router-outlet id="main"></ion-router-outlet>
+
+<ion-menu
+  (ionWillOpen)="menuIsOpening()"
+  (ionDidOpen)="menuIsOpening()"
+  (ionWillClose)="menuIsClosing()"
+  (ionDidClose)="menuIsClosing()"
+  type="push"
+  side="start"
+  menuId="first"
+  class="app-menu"
+  contentId="main"
+>
   <ion-content>
-    <ion-list>
-      <ion-item>Menu Item</ion-item>
-      <ion-item>Menu Item</ion-item>
-      <ion-item>Menu Item</ion-item>
-      <ion-item>Menu Item</ion-item>
-      <ion-item>Menu Item</ion-item>
-    </ion-list>
+    <div class="logo-container">
+      <img class="logo" src="../../assets/images/logo.png" alt="" />
+    </div>
+    <div>
+      <ion-list class="links">
+        <ion-item lines="full" class="link-item">
+          <ion-icon
+            slot="start"
+            src="../../assets/icon/home-Light.svg"
+            class="link-icon"
+          ></ion-icon>
+          <ion-label class="link-label">Home</ion-label>
+        </ion-item>
+        <ion-item lines="full" class="link-item">
+          <ion-icon
+            slot="start"
+            src="../../assets/icon/calendar-Light.svg"
+            class="link-icon"
+          ></ion-icon>
+          <ion-label class="link-label">Calendar</ion-label>
+        </ion-item>
+        <ion-item lines="full" class="link-item">
+          <ion-accordion-group class="subitem-accordion">
+            <ion-accordion value="first" style="width: 100%">
+              <ion-item slot="header" color="light" class="sublink-item">
+                <ion-icon
+                  slot="start"
+                  src="../../assets/icon/thumbtack-Light.svg"
+                  class="link-icon"
+                ></ion-icon>
+                <ion-label class="link-label">Event</ion-label>
+              </ion-item>
+              <div class="ion-padding-start" slot="content">
+                <ion-list class="links">
+                  <ion-item lines="none" class="link-item">
+                    <ion-icon
+                      slot="start"
+                      src="../../assets/icon/pen-Light.svg"
+                      class="link-icon"
+                    ></ion-icon>
+                    <ion-label class="link-label">Register</ion-label>
+                  </ion-item>
+                  <ion-item lines="none" class="link-item">
+                    <ion-icon
+                      slot="start"
+                      src="../../assets/icon/bell-Light.svg"
+                      class="link-icon"
+                    ></ion-icon>
+                    <ion-label class="link-label">Reminder</ion-label>
+                  </ion-item>
+                  <ion-item lines="none" class="link-item">
+                    <ion-icon
+                      slot="start"
+                      src="../../assets/icon/plus-square-Light.svg"
+                      class="link-icon"
+                    ></ion-icon>
+                    <ion-label class="link-label">Add Event</ion-label>
+                  </ion-item>
+                </ion-list>
+              </div>
+            </ion-accordion>
+          </ion-accordion-group>
+        </ion-item>
+        <ion-item lines="full" class="link-item">
+          <ion-icon
+            slot="start"
+            name="time-outline"
+            class="link-icon"
+          ></ion-icon>
+          <ion-label class="link-label">Clock In/Out</ion-label>
+        </ion-item>
+        <ion-item lines="full" class="link-item">
+          <ion-icon
+            slot="start"
+            src="../../assets/icon/comments-Light.svg"
+            class="link-icon"
+          ></ion-icon>
+          <ion-label class="link-label">Chat Room</ion-label>
+        </ion-item>
+        <ion-item lines="full" class="link-item">
+          <ion-icon
+            slot="start"
+            src="../../assets/icon/user-Light.svg"
+            class="link-icon"
+          ></ion-icon>
+          <ion-label class="link-label">Profile</ion-label>
+        </ion-item>
+        <ion-item lines="none" class="link-item">
+          <ion-icon
+            slot="start"
+            src="../../assets/icon/settings-Light.svg"
+            class="link-icon"
+          ></ion-icon>
+          <ion-label class="link-label">Settings</ion-label>
+        </ion-item>
+      </ion-list>
+    </div>
   </ion-content>
 </ion-menu>
-
-<ion-router-outlet id="main"></ion-router-outlet>

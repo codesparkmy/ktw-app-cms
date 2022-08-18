@@ -3,12 +3,12 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
-import { SliderComponent } from './slider.component';
-import { CardComponent } from '../card/card.component';
+import { ListComponent } from './list.component';
+import { ItemComponent } from '../item/item.component';
 
 @NgModule({
   imports: [CommonModule, FormsModule, IonicModule],
-  declarations: [SliderComponent, CardComponent],
-  exports : [SliderComponent,CardComponent]
+  declarations: [ListComponent, ItemComponent],
+  exports : [ListComponent,ItemComponent]
 })
-export class EventSliderComponentModule {}
+export class ChatListComponentModule {}

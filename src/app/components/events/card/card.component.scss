@@ -1,0 +1,56 @@
+.event-card {
+  padding: 6px;
+  .event-card-inner {
+    background-color: red;
+    border-radius: 20px;
+    height: 170px;
+    width: 100%;
+    position: relative;
+
+    .time-location {
+      position: absolute;
+      top: 13px;
+      left: 13px;
+      font-size: 14px;
+      .time,
+      .location {
+        display: flex;
+        align-items: center;
+        color: white;
+        ion-icon {
+          font-size: 15px;
+          color: white;
+        }
+
+        p {
+          font-family: "Roboto";
+          margin: 0;
+          font-size: 12px;
+          margin-left: 6px;
+        }
+      }
+      .time {
+        margin-bottom: 5px;
+      }
+    }
+
+    .header {
+      position: absolute;
+      bottom: 13px;
+      left: 13px;
+      color: white;
+      text-align: left;
+
+      .title {
+        font-family: "Roboto";
+        font-weight: 500;
+        font-size: 24px;
+      }
+
+      .subtitle {
+        font-family: "Roboto";
+        font-size: 16px;
+      }
+    }
+  }
+}

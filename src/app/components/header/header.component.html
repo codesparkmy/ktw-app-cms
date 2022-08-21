@@ -1,13 +1,36 @@
 <div class="top-bar-header">
   <ion-row>
     <ion-col size="6" class="ion-align-self-center">
-      <img
-        [ngClass]="{ 'is-menu-opened': menuIsOpened }"
-        (click)="toggleMenu()"
-        src="../../../assets/icon/menu.png"
-        class="menu-icon"
-        alt=""
-      />
+      <ng-container *ngIf="isBack === ''; else menuTemplate">
+        <div class="ion-activatable back-button" (click)="backClicked()">
+          <ion-ripple-effect type="bounded"></ion-ripple-effect>
+          <ion-icon
+            slot="icon-only"
+            name="arrow-back-outline"
+            style="color: white; width: 25px; height: 25px"
+          ></ion-icon>
+        </div>
+      </ng-container>
+      <ng-template #menuTemplate>
+        <ng-container *ngIf="isWhite === ''; else colorTemplate">
+          <img
+            [ngClass]="{ 'is-menu-opened': menuIsOpened }"
+            (click)="toggleMenu()"
+            src="../../../assets/icon/menu-white.svg"
+            class="menu-icon"
+            alt=""
+          />
+        </ng-container>
+        <ng-template #colorTemplate>
+          <img
+            [ngClass]="{ 'is-menu-opened': menuIsOpened }"
+            (click)="toggleMenu()"
+            src="../../../assets/icon/menu.png"
+            class="menu-icon"
+            alt=""
+          />
+        </ng-template>
+      </ng-template>
     </ion-col>
     <ion-col size="6" class="ion-align-self-center">
       <ion-avatar class="avatar">

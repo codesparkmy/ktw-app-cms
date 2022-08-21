@@ -17,7 +17,11 @@
     </div>
     <div>
       <ion-list class="links">
-        <ion-item lines="full" class="link-item">
+        <ion-item
+          lines="full"
+          class="link-item"
+          [routerLink]="[ '/members/home' ]"
+        >
           <ion-icon
             slot="start"
             src="../../assets/icon/home-Light.svg"
@@ -36,7 +40,12 @@
         <ion-item lines="full" class="link-item">
           <ion-accordion-group class="subitem-accordion">
             <ion-accordion value="first" style="width: 100%">
-              <ion-item slot="header" color="light" class="sublink-item">
+              <ion-item
+                slot="header"
+                color="light"
+                class="sublink-item"
+                [routerLink]="[ '/members/events' ]"
+              >
                 <ion-icon
                   slot="start"
                   src="../../assets/icon/thumbtack-Light.svg"

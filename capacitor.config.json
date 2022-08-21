@@ -1,5 +1,5 @@
 {
-	"appId": "io.ionic.starter",
+	"appId": "com.ktw.app",
 	"appName": "cms-app",
 	"webDir": "www",
 	"bundledWebRuntime": false

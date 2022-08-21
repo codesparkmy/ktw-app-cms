@@ -1,5 +1,6 @@
 {
-  "name": "cms-app",
+  "name": "ktw-app",
+  "id": "com.ktw.app",
   "integrations": {
     "capacitor": {}
   },

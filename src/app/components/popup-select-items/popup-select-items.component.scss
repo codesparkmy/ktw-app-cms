@@ -1,0 +1,37 @@
+ion-header {
+  border-bottom: 1px solid #ebebeb;
+  ion-title {
+    font-family: "Roboto";
+  }
+}
+
+.popup-select-list {
+  ion-item {
+    --padding-top: 6px;
+    --padding-bottom: 6px;
+
+    &.selected {
+      --background: #6971fe;
+      --color: white;
+    }
+  }
+  ion-label {
+    font-family: "Roboto";
+    font-size: 16px;
+  }
+}
+
+.buttons {
+  .button {
+    width: 100%;
+    padding: 16px;
+    color: black;
+    text-align: center;
+    font-family: "Poppins";
+    font-weight: 500;
+
+    &.error {
+      color: rgb(255, 17, 0);
+    }
+  }
+}

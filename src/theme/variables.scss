@@ -3,8 +3,9 @@
 
 /** Ionic CSS Variables **/
 
-@import url("./padding.scss");
-@import url("./typo.scss");
+@import "./padding.scss";
+@import "./typo.scss";
+@import "./custom.scss";
 
 :root {
   /** primary **/
@@ -301,3 +302,13 @@ $sizes: 12;
   }
 }
 @include padding-classes;
+
+.ion-activatable {
+  position: relative;
+}
+
+.popup-select-items {
+  --height: 50%;
+  --width: 90%;
+  --border-radius: 10px;
+}

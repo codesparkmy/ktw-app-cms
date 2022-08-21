@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { NavigationEnd, Router } from '@angular/router';
 import { MenuController } from '@ionic/angular';
 import { PubSubService } from '../services/internal/pub-sub.service';
 
@@ -8,9 +9,19 @@ import { PubSubService } from '../services/internal/pub-sub.service';
   styleUrls: ['./authorized.page.scss'],
 })
 export class AuthorizedPage implements OnInit {
-  constructor(private pubSubService: PubSubService) {}
+  constructor(
+    private pubSubService: PubSubService,
+    private router: Router,
+    private menuController: MenuController
+  ) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.router.events.subscribe((z) => {
+      if (z instanceof NavigationEnd) {
+        this.menuController.close();
+      }
+    });
+  }
 
   menuIsOpening() {
     this.pubSubService.menuStateSubject.next(true);

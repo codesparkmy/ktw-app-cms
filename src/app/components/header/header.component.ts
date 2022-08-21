@@ -1,4 +1,11 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  OnDestroy,
+  OnInit,
+  Output,
+} from '@angular/core';
 import { MenuController } from '@ionic/angular';
 import { Subscription } from 'rxjs';
 import { PubSubService } from 'src/app/services/internal/pub-sub.service';
@@ -9,6 +16,9 @@ import { PubSubService } from 'src/app/services/internal/pub-sub.service';
   styleUrls: ['./header.component.scss'],
 })
 export class HeaderComponent implements OnInit, OnDestroy {
+  @Input('white') isWhite;
+  @Input('back') isBack;
+  @Output('backClicked') backClickedEmitter = new EventEmitter();
   menuIsOpened = false;
   menuStateSub?: Subscription;
 
@@ -22,13 +32,19 @@ export class HeaderComponent implements OnInit, OnDestroy {
     });
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+    console.log(this.isWhite);
+  }
 
   ngOnDestroy(): void {
     this.menuStateSub?.unsubscribe();
   }
-  
+
   toggleMenu() {
     this.menuController.toggle();
+  }
+
+  backClicked() {
+    this.backClickedEmitter.emit();
   }
 }

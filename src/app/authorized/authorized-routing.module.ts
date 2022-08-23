@@ -25,6 +25,13 @@ const routes: Routes = [
             (m) => m.EventDetailPageModule
           ),
       },
+      {
+        path: 'calendar',
+        loadChildren: () =>
+          import('./calendar/calendar.module').then(
+            (m) => m.CalendarPageModule
+          ),
+      },
     ],
   },
 ];

@@ -1,0 +1,29 @@
+<ion-content>
+  <top-bar-header></top-bar-header>
+
+  <p class="pl-16 page-title">Check-In</p>
+
+  <div class="center-page">
+    <div class="container">
+      <div class="grid-col-span-2 justify-center">
+        <p class="time">{{ time | date: 'hh:mm a' }}</p>
+      </div>
+
+      <div
+        class="btn-outer-start justify-center"
+        [ngClass]="{disable: disableButtonStart}"
+        (click)="start()"
+      >
+        <p class="start">Start</p>
+      </div>
+
+      <div
+        class="btn-outer-stop justify-center"
+        [ngClass]="{disable: disableButtonStop}"
+        (click)="stop()"
+      >
+        <p class="stop">Stop</p>
+      </div>
+    </div>
+  </div>
+</ion-content>

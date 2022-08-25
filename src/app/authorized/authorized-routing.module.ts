@@ -25,12 +25,19 @@ const routes: Routes = [
             (m) => m.EventDetailPageModule
           ),
       },
+      {
+        path: 'check-in',
+        loadChildren: () => import('./check-in/check-in.module').then(
+          m => m.CheckInPageModule
+        )
+      },
     ],
   },
+
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
 })
-export class AuthorizedPageRoutingModule {}
+export class AuthorizedPageRoutingModule { }

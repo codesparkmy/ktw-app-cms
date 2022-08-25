@@ -31,6 +31,13 @@ const routes: Routes = [
           m => m.CheckInPageModule
         )
       },
+      {
+        path: 'calendar',
+        loadChildren: () =>
+          import('./calendar/calendar.module').then(
+            (m) => m.CalendarPageModule
+          ),
+      },
     ],
   },
 

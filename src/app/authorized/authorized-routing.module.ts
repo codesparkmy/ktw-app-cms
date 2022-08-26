@@ -27,9 +27,8 @@ const routes: Routes = [
       },
       {
         path: 'check-in',
-        loadChildren: () => import('./check-in/check-in.module').then(
-          m => m.CheckInPageModule
-        )
+        loadChildren: () =>
+          import('./check-in/check-in.module').then((m) => m.CheckInPageModule),
       },
       {
         path: 'calendar',
@@ -38,13 +37,17 @@ const routes: Routes = [
             (m) => m.CalendarPageModule
           ),
       },
+      {
+        path: 'profile',
+        loadChildren: () =>
+          import('./profile/profile.module').then((m) => m.ProfilePageModule),
+      },
     ],
   },
-
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
 })
-export class AuthorizedPageRoutingModule { }
+export class AuthorizedPageRoutingModule {}

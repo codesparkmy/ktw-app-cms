@@ -1,0 +1,83 @@
+.avatar-circle {
+  border-radius: 50%;
+  width: 10rem;
+  height: 10rem;
+}
+
+.container-profile {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1.5rem;
+}
+
+.profile-picture {
+  display: flex;
+  flex-direction: column;
+}
+
+.profile-picture:last-child {
+  background-color: aqua;
+}
+
+.profile-name {
+  font-family: "Roboto";
+  font-size: 32px;
+  font-weight: bold;
+}
+
+.camera-btn {
+  margin-top: -1.5rem;
+  margin-right: 1rem;
+  align-self: end;
+  background: linear-gradient(336deg, rgba(168, 38, 199, 1) 35%, #6e00dd 100%);
+  height: 2rem;
+  width: 2rem;
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+  align-items: center;
+  border-radius: 50%;
+  color: #fff;
+}
+
+.profile-list {
+  width: 100% !important;
+}
+
+.items {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  padding: 5px 1rem;
+  padding-right: 2rem;
+  gap: 0.5rem;
+  margin: 2px 0;
+}
+
+.item:last-child {
+  grid-column-start: 2;
+  grid-row-start: 1;
+  grid-row-end: 3;
+}
+
+.edit-btn{
+    align-self: center;
+    justify-self: end;
+    font-family: "Roboto";
+    font-size: 18px;
+    color: #A826C7;
+}
+
+.title{
+    font-family: "Roboto";
+    font-size: 14px;
+    color: #BBBEC7;
+}
+
+.content{
+    font-family: "Roboto";
+    font-weight: bold;
+    font-size: 18px;
+}

@@ -49,6 +49,10 @@ const routes: Routes = [
       },
     ],
   },
+  {
+    path: 'chat-message',
+    loadChildren: () => import('./chat-message/chat-message.module').then( m => m.ChatMessagePageModule)
+  },
 ];
 
 @NgModule({

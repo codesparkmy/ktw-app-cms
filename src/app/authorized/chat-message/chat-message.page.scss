@@ -1,11 +1,27 @@
+//content
+
+.content {
+  position: relative;
+  width: 100%;
+  --overflow: hidden;
+  overflow: auto;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
 //header
 
 .chat-header {
   display: grid;
   grid-template-columns: 0.5fr 0.8fr 3fr;
-  background-color: #f7f8fb;
+  background-color: rgb(247, 248, 251);
   padding: 14px 12px;
-  box-shadow: 1px 9px 10px -10px rgb(0 0 0 / 20%);
+  border-bottom: 1px rgb(0 0 0 / 15%) solid;
+  position: absolute;
+  z-index: 1;
+  width: 100%;
+  gap: 0.8rem;
 }
 
 .back-btn {
@@ -24,12 +40,12 @@
     border-radius: 100%;
     align-self: flex-end;
     margin-left: -12px;
+    box-shadow: 0px 0px 0px 3px rgb(247, 248, 251);
   }
 }
 
 .wrapper-text-name {
   align-self: center;
-  margin-left: -5px;
   font-family: "Roboto";
   .name {
   }
@@ -37,6 +53,24 @@
     color: #bfc4d3;
     font-weight: 400;
   }
+}
+
+//chat
+
+.chat {
+  display: flex;
+  flex-direction: column;
+  height: calc(100% - 4rem);
+  padding-bottom: 10px;
+  overflow: scroll;
+  overflow-x: hidden;
+  position: absolute;
+  top: 0;
+  padding-top: 6rem;
+}
+
+.chat::-webkit-scrollbar {
+  display: none; /* Safari and Chrome */
 }
 
 //user chatbox
@@ -147,7 +181,28 @@ p.client-message {
 .chat-textbox {
   width: 100%;
   height: 4rem;
-  background: red;
   position: absolute;
   bottom: 0;
+  display: grid;
+  grid-template-columns: 1fr 5fr 1fr;
+  align-items: center;
+  padding: 0 10px;
+  box-shadow: 1px -3px 6px 0px rgba(0,0,0,0.15);
+}
+
+.textbox {
+  background: rgb(247, 248, 251);
+  height: 2.5rem;
+  --padding-start: 15px !important;
+  --padding-end: 15px !important;
+  border-radius: 18px;
+  grid-column-start: 1;
+  grid-column-end: 3;
+  font-family: "Roboto";
+}
+
+.send {
+  font-size: 1.5rem;
+  justify-self: center;
+  
 }

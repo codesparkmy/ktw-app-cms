@@ -4,20 +4,20 @@ import { FormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
-import { EventDetailPageRoutingModule } from './event-detail-routing.module';
+import { LeavePageRoutingModule } from './leave-routing.module';
 
-import { EventDetailPage } from './event-detail.page';
+import { LeavePage } from './leave.page';
 import { HeaderComponent } from 'src/app/components/header/header.component';
 import { EventDetailModalDetailComponent } from 'src/app/components/event-detail-modal-detail/event-detail-modal-detail.component';
+import { LeaveRequestModalComponent } from 'src/app/components/leave-request-modal/leave-request-modal.component';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    EventDetailPageRoutingModule,
+    LeavePageRoutingModule
   ],
-  declarations: [EventDetailPage, HeaderComponent,EventDetailModalDetailComponent],
+  declarations: [LeavePage,HeaderComponent,EventDetailModalDetailComponent,LeaveRequestModalComponent]
 })
-
-export class EventDetailPageModule {}
+export class LeavePageModule {}

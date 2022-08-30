@@ -1,0 +1,205 @@
+.title-modal {
+  font-family: "Roboto";
+  font-size: 28px;
+  font-weight: 500;
+}
+
+.fab-style {
+  --background: linear-gradient(
+    60deg,
+    rgba(105, 113, 254, 1) 0%,
+    rgba(141, 126, 168, 1) 100%
+  );
+  --box-shadow: -1px 8px 12px 0px rgba(48, 78, 236, 0.39);
+  grid-column-start: 3;
+  grid-column-end: 4;
+}
+
+.wrapper-leave-status {
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+}
+
+.wrapper-leave-header {
+  display: grid;
+  grid-template-columns: 1fr 3fr 1fr;
+  margin-top: 10px;
+  margin-bottom: 30px;
+}
+
+.leave-reject {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 0.5fr 1fr 1fr 1fr;
+  gap: 15px;
+
+  .leave-type {
+    font-family: "Roboto";
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+
+  .reason-leave {
+    font-family: "Roboto";
+    font-size: 20px;
+  }
+
+  .box-date {
+    grid-row-start: 1;
+    grid-row-end: 4;
+    background: black;
+    color: white;
+    border-bottom-right-radius: 10px;
+    border-top-right-radius: 10px;
+    font-family: "Roboto";
+    font-size: 18px;
+    font-weight: 500;
+    padding: 50% 0;
+    display: flex;
+    flex-flow: column;
+    justify-content: center;
+    text-align: center;
+  }
+
+  .reject-status {
+    grid-row-start: 3;
+    align-self: end;
+    display: flex;
+    flex-direction: row;
+    font-size: 20px;
+    line-height: 20px;
+  }
+
+  .action-btn {
+    grid-column-start: 4;
+    grid-row-start: 3;
+    align-self: end;
+    font-family: "Roboto";
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 30px;
+  }
+}
+
+.leave-approve {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 0.5fr 1fr 1fr 1fr;
+  gap: 15px;
+
+  .leave-type {
+    font-family: "Roboto";
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+
+  .reason-leave {
+    font-family: "Roboto";
+    font-size: 20px;
+  }
+
+  .box-date {
+    grid-row-start: 1;
+    grid-row-end: 4;
+    background: linear-gradient(150deg, #7001dc, #a826c7);
+    color: white;
+    border-bottom-right-radius: 10px;
+    border-top-right-radius: 10px;
+    font-family: "Roboto";
+    font-size: 18px;
+    font-weight: 500;
+    padding: 50% 0;
+    display: flex;
+    flex-flow: column;
+    justify-content: center;
+    text-align: center;
+  }
+
+  .reject-status {
+    grid-row-start: 3;
+    align-self: end;
+    display: flex;
+    flex-direction: row;
+    font-size: 20px;
+    line-height: 20px;
+  }
+
+  .action-btn {
+    grid-column-start: 4;
+    grid-row-start: 3;
+    align-self: end;
+    font-family: "Roboto";
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 30px;
+  }
+}
+.leave-pending {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 0.5fr 1fr 1fr 1fr;
+  gap: 15px;
+
+  .leave-type {
+    font-family: "Roboto";
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+
+  .reason-leave {
+    font-family: "Roboto";
+    font-size: 20px;
+  }
+
+  .box-date {
+    grid-row-start: 1;
+    grid-row-end: 4;
+    background: #ededed;
+    color: black;
+    border-bottom-right-radius: 10px;
+    border-top-right-radius: 10px;
+    font-family: "Roboto";
+    font-size: 18px;
+    font-weight: 500;
+    padding: 50% 0;
+    display: flex;
+    flex-flow: column;
+    justify-content: center;
+    text-align: center;
+  }
+
+  .reject-status {
+    grid-row-start: 3;
+    align-self: end;
+    display: flex;
+    flex-direction: row;
+    font-size: 20px;
+    line-height: 20px;
+  }
+
+  .action-btn {
+    grid-column-start: 4;
+    grid-row-start: 3;
+    align-self: end;
+    font-family: "Roboto";
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 30px;
+  }
+}
+
+.grid-col-span-3 {
+  grid-column: 3 span;
+}
+
+.grid-col-span-2 {
+  grid-column: 2 span;
+}
+
+.grid-row-span-2 {
+  grid-row: 2 span;
+}

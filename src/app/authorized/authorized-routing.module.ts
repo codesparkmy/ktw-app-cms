@@ -47,11 +47,15 @@ const routes: Routes = [
         loadChildren: () =>
           import('./chat/chat.module').then((m) => m.ChatPageModule),
       },
+      {
+        path: 'chat-message',
+        loadChildren: () => import('./chat-message/chat-message.module').then( m => m.ChatMessagePageModule)
+      },
+      {
+        path: 'leave',
+        loadChildren: () => import('./leave/leave.module').then( m => m.LeavePageModule)
+      },
     ],
-  },
-  {
-    path: 'chat-message',
-    loadChildren: () => import('./chat-message/chat-message.module').then( m => m.ChatMessagePageModule)
   },
 ];
 

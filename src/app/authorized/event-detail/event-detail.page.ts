@@ -14,7 +14,7 @@ import { NavController, Platform } from '@ionic/angular';
   templateUrl: './event-detail.page.html',
   styleUrls: ['./event-detail.page.scss'],
 })
-export class EventDetailPage implements OnInit, OnDestroy {
+export class EventDetailPage implements OnInit, OnDestroy, AfterViewInit {
   @ViewChild('eventImage') eventImage;
   @ViewChild('modal') modal;
   breakpoint = null;
@@ -23,7 +23,8 @@ export class EventDetailPage implements OnInit, OnDestroy {
 
   ngOnInit() {}
 
-  imageLoaded() {
+  ngAfterViewInit(): void {
+    console.log('trigger in event details')
     setTimeout(() => {
       var percentage =
         1 -
@@ -37,12 +38,17 @@ export class EventDetailPage implements OnInit, OnDestroy {
     });
   }
 
+  imageLoaded() {
+    
+  }
+
   backClicked() {
     this.modal.dismiss();
     this.navCtrl.back();
   }
 
   ngOnDestroy(): void {
+    console.log('destroy')
     this.modal.dismiss();
   }
 }

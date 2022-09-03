@@ -5,9 +5,10 @@
         <div class="ion-activatable back-button" (click)="backClicked()">
           <ion-ripple-effect type="bounded"></ion-ripple-effect>
           <ion-icon
+            [ngClass]="{ 'black': backBlack }"
             slot="icon-only"
             name="arrow-back-outline"
-            style="color: white; width: 25px; height: 25px"
+            style="color:white;width: 25px; height: 25px"
           ></ion-icon>
         </div>
       </ng-container>

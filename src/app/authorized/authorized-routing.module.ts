@@ -55,8 +55,13 @@ const routes: Routes = [
         path: 'leave',
         loadChildren: () => import('./leave/leave.module').then( m => m.LeavePageModule)
       },
+      {
+        path: 'apply-leave',
+        loadChildren: () => import('./apply-leave/apply-leave.module').then( m => m.ApplyLeavePageModule)
+      },
     ],
   },
+  
 ];
 
 @NgModule({

@@ -1,0 +1,75 @@
+<ion-content>
+  <top-bar-header back backBlack (backClicked)="backClicked()"></top-bar-header>
+  <p class="pl-16 page-title mt-16">Leave Balance</p>
+  <div class="px-4 mt-3 mb-15">
+    <p>TYPE OF LEAVE</p>
+    <popup-select></popup-select>
+  </div>
+  <ion-grid class="px-4 mb-15">
+    <ion-row>
+      <ion-col size="6" class="no-pl">
+        <p>STARTS AT</p>
+        <div class="calendar-container" id="open-start-calendar">
+          <ion-text class="text-date"> {{startDateString}}</ion-text>
+          <ion-icon
+            class="calendar-icon"
+            datetime="datetime"
+            name="calendar-number-outline"
+          ></ion-icon>
+        </div>
+        <ion-modal class="modal-calendar" trigger="open-end-calendar">
+          <ng-template>
+            <ion-content class="content-calendar">
+              <ion-datetime
+                #datetime
+                (ionChange)="dateChanged(datetime.value)"
+                size="cover"
+                showDefaultButtons="true"
+                presentation="date"
+              ></ion-datetime>
+            </ion-content>
+          </ng-template>
+        </ion-modal>
+      </ion-col>
+      <ion-col size="6" class="no-pr">
+        <p>ENDS AT</p>
+        <div class="calendar-container" id="open-end-calendar">
+          <ion-text class="text-date"> {{endDateString}} </ion-text>
+          <ion-icon
+            class="calendar-icon"
+            datetime="datetime"
+            name="calendar-number-outline"
+          ></ion-icon>
+        </div>
+        <ion-modal class="modal-calendar" trigger="open-end-calendar">
+          <ng-template>
+            <ion-content class="content-calendar">
+              <ion-datetime
+                #datetime
+                (ionChange)="dateChanged(datetime.value)"
+                size="cover"
+                showDefaultButtons="true"
+                presentation="date"
+              ></ion-datetime>
+            </ion-content>
+          </ng-template>
+        </ion-modal>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  <div class="px-4 mt-3 mb-15">
+    <p>REASONS</p>
+    <ion-textarea class="multiLineText"></ion-textarea>
+  </div>
+  <div class="px-4 mt-3 mb-15">
+    <p>ATTACHMENT</p>
+    <div class="camera-container">
+      <ion-icon class="camera-icon" name="camera-outline"></ion-icon>
+    </div>
+  </div>
+  <div class="px-4 mt-3 mb-15">
+    <div class="apply-btn">
+      <p class="apply-txt">Apply</p>
+    </div>
+  </div>
+</ion-content>

@@ -18,9 +18,11 @@ import { PubSubService } from 'src/app/services/internal/pub-sub.service';
 export class HeaderComponent implements OnInit, OnDestroy {
   @Input('white') isWhite;
   @Input('back') isBack;
+  @Input('backBlack') isBackBlack;
   @Output('backClicked') backClickedEmitter = new EventEmitter();
   menuIsOpened = false;
   menuStateSub?: Subscription;
+  backBlack = false;
 
   constructor(
     private menuController: MenuController,
@@ -34,6 +36,12 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     console.log(this.isWhite);
+    console.log('bW :',this.isBackBlack)
+    if(this.isBackBlack === ''){
+      this.backBlack = true;
+    }else{
+      this.backBlack = false;
+    }
   }
 
   ngOnDestroy(): void {

@@ -1,6 +1,7 @@
 import {
   AfterViewInit,
   Component,
+  HostListener,
   Input,
   OnDestroy,
   OnInit,
@@ -14,23 +15,29 @@ import { NavController, Platform } from '@ionic/angular';
   templateUrl: './leave.page.html',
   styleUrls: ['./leave.page.scss'],
 })
-export class LeavePage implements OnInit, AfterViewInit {
+export class LeavePage implements OnInit, AfterViewInit, OnDestroy {
   @ViewChild('progress') progress;
   @ViewChild('modal') modal;
+  @ViewChild('header') header;
   breakpoint = null;
   initBreakpoint = null;
-  constructor(private platform: Platform, private navCtrl: NavController) {}
+  constructor(private platform: Platform) {}
 
   ngOnInit() {}
 
+  ionViewDidEnter(){
+    console.log(this.breakpoint);
+    console.log(this.initBreakpoint);
+  }
+
   ngAfterViewInit(): void {
+    console.log('trigger after view init');
     setTimeout(() => {
-      console.log(this.progress.nativeElement.offsetTop);
-      console.log(this.progress.nativeElement);
       var percentage =
         1 -
         (this.progress.nativeElement.offsetTop +
-          this.progress.nativeElement.clientHeight + 70) /
+          this.progress.nativeElement.clientHeight +
+          70) /
           this.platform.height();
       var bp = Math.round(percentage * 100) / 100;
       this.breakpoint = [bp, 0.95];
@@ -38,7 +45,9 @@ export class LeavePage implements OnInit, AfterViewInit {
     });
   }
 
+  @HostListener('ionViewDidLeave')
   ngOnDestroy(): void {
+    console.log('destroy');
     this.modal.dismiss();
   }
 }

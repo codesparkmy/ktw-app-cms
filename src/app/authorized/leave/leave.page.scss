@@ -18,6 +18,17 @@
   padding-right: 16px;
 }
 
+/* Hide scrollbar for Chrome, Safari and Opera */
+.progress-group::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+.progress-group {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+
 .circle-progress:last-child {
 }
 

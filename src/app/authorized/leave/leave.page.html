@@ -1,4 +1,4 @@
-<ion-content class="bg-gradient-1">
+<ion-content class="bg-gradient-1" id="leave-content">
   <top-bar-header #header white></top-bar-header>
   <p class="pl-16 page-title white">Leave</p>
   <p class="pl-16 page-subtitle white mt-16">Leave Balance</p>
@@ -73,6 +73,11 @@
     [backdropBreakpoint]="initBreakpoint"
   >
     <ng-template>
+      <ion-header>
+        <ion-toolbar>
+          <ion-title>Letak sini header</ion-title>
+        </ion-toolbar>
+      </ion-header>
       <ion-content style="--padding-bottom: 5rem">
         <leave-request-modal></leave-request-modal>
       </ion-content>

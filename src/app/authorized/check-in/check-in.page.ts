@@ -46,12 +46,10 @@ export class CheckInPage implements OnInit, OnDestroy {
   }
 
   start() {
-    console.log('start');
     this.disableButtonStop = false;
     this.disableButtonStart = true;
   }
   stop() {
-    console.log('stop');
     this.disableButtonStop = true;
     this.disableButtonStart = false;
   }

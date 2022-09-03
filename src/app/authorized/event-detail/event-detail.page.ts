@@ -24,7 +24,6 @@ export class EventDetailPage implements OnInit, OnDestroy, AfterViewInit {
   ngOnInit() {}
 
   ngAfterViewInit(): void {
-    console.log('trigger in event details')
     setTimeout(() => {
       var percentage =
         1 -
@@ -38,9 +37,7 @@ export class EventDetailPage implements OnInit, OnDestroy, AfterViewInit {
     });
   }
 
-  imageLoaded() {
-    
-  }
+  imageLoaded() {}
 
   backClicked() {
     this.modal.dismiss();
@@ -48,7 +45,6 @@ export class EventDetailPage implements OnInit, OnDestroy, AfterViewInit {
   }
 
   ngOnDestroy(): void {
-    console.log('destroy')
     this.modal.dismiss();
   }
 }

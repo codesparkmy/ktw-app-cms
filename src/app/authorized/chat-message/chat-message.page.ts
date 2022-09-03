@@ -11,6 +11,5 @@ export class ChatMessagePage implements OnInit {
   ngOnInit() {}
 
   send(){
-    console.log("SEND!")
   }
 }

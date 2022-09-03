@@ -35,11 +35,9 @@ export class HeaderComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    console.log(this.isWhite);
-    console.log('bW :',this.isBackBlack)
-    if(this.isBackBlack === ''){
+    if (this.isBackBlack === '') {
       this.backBlack = true;
-    }else{
+    } else {
       this.backBlack = false;
     }
   }

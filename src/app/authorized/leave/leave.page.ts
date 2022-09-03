@@ -8,7 +8,14 @@ import {
   ViewChild,
 } from '@angular/core';
 import { Router } from '@angular/router';
-import { NavController, Platform } from '@ionic/angular';
+import {
+  IonModal,
+  ModalController,
+  NavController,
+  Platform,
+} from '@ionic/angular';
+import { Subscription } from 'rxjs';
+import { PubSubService } from 'src/app/services/internal/pub-sub.service';
 
 @Component({
   selector: 'app-leave',
@@ -17,21 +24,34 @@ import { NavController, Platform } from '@ionic/angular';
 })
 export class LeavePage implements OnInit, AfterViewInit, OnDestroy {
   @ViewChild('progress') progress;
-  @ViewChild('modal') modal;
+  @ViewChild('modal') modal: IonModal;
   @ViewChild('header') header;
   breakpoint = null;
   initBreakpoint = null;
-  constructor(private platform: Platform) {}
+  presentingElement = null;
+  menuSubscriber?: Subscription;
 
-  ngOnInit() {}
+  constructor(
+    private platform: Platform,
+    private modalController: ModalController,
+    private pubSub: PubSubService
+  ) {}
 
-  ionViewDidEnter(){
-    console.log(this.breakpoint);
-    console.log(this.initBreakpoint);
+  ngOnInit() {
+    this.presentingElement = document.querySelector('#leave-content');
+    this.menuSubscriber = this.pubSub.menuStateSubject.subscribe((z) => {
+      if (this.modal) {
+        if (z) this.modal.dismiss();
+        else this.modal.present();
+      }
+    });
+  }
+
+  ionViewDidEnter() {
+    if (this.breakpoint && this.initBreakpoint) this.modal.present();
   }
 
   ngAfterViewInit(): void {
-    console.log('trigger after view init');
     setTimeout(() => {
       var percentage =
         1 -
@@ -45,9 +65,11 @@ export class LeavePage implements OnInit, AfterViewInit, OnDestroy {
     });
   }
 
-  @HostListener('ionViewDidLeave')
-  ngOnDestroy(): void {
-    console.log('destroy');
+  ionViewWillLeave() {
     this.modal.dismiss();
+  }
+
+  ngOnDestroy(): void {
+    this.menuSubscriber.unsubscribe();
   }
 }

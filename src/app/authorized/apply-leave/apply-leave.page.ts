@@ -10,6 +10,7 @@ import { Camera, CameraResultType } from '@capacitor/camera';
 })
 export class ApplyLeavePage implements OnInit {
   picture:string;
+  options:object[];
   dateValue = format(new Date(), 'd MMM yyyy');
   endDateString = '';
   startDateString = '';
@@ -18,7 +19,13 @@ export class ApplyLeavePage implements OnInit {
     this.startDate();
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.options = [
+      {title:"Annual",Value:"Annual"},
+      {title:"Medical",Value:"Medical"},
+      {title:"Emergency",Value:"Emergency"}
+    ]
+  }
 
   endDate() {
     this.endDateString = format(new Date(), 'd MMM yyyy');

@@ -25,12 +25,12 @@ import { PubSubService } from 'src/app/services/internal/pub-sub.service';
 })
 export class LeavePage implements OnInit, AfterViewInit, OnDestroy {
   @ViewChild('progress') progress;
-  @ViewChild('modal') modal: IonModal;
   @ViewChild('header') header;
   breakpoint = null;
   initBreakpoint = null;
   menuSubscriber?: Subscription;
 
+  leaveTypes = [];
   constructor(
     private platform: Platform,
     private pubSub: PubSubService,
@@ -39,37 +39,16 @@ export class LeavePage implements OnInit, AfterViewInit, OnDestroy {
 
   ngOnInit() {
     this.leaveApiService.getSummaries().then((res) => {
-      console.log(res.data);
-    });
-    this.menuSubscriber = this.pubSub.menuStateSubject.subscribe((z) => {
-      if (this.modal) {
-        if (z.isNav || z.isClosing) this.modal.dismiss();
-        else this.modal.present();
-      }
+      this.leaveTypes = res.data;
+      console.log(this.leaveTypes);
     });
   }
 
-  ionViewDidEnter() {
-    if (this.breakpoint && this.initBreakpoint) this.modal.present();
-  }
+  ionViewDidEnter() {}
 
-  ngAfterViewInit(): void {
-    setTimeout(() => {
-      var percentage =
-        1 -
-        (this.progress.nativeElement.offsetTop +
-          this.progress.nativeElement.clientHeight +
-          20) /
-          this.platform.height();
-      var bp = Math.round(percentage * 100) / 100;
-      this.breakpoint = [bp, 0.95];
-      this.initBreakpoint = bp;
-    }, 300);
-  }
+  ngAfterViewInit(): void {}
 
-  ionViewWillLeave() {
-    this.modal.dismiss();
-  }
+  ionViewWillLeave() {}
 
   ngOnDestroy(): void {
     this.menuSubscriber.unsubscribe();

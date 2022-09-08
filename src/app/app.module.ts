@@ -11,6 +11,7 @@ import { AuthApiService } from './services/apis/auth.api.service';
 import { PubSubService } from './services/internal/pub-sub.service';
 import { BaseApiService } from './services/apis/base.api.service';
 import { LeaveApiService } from './services/apis/leave.api.service';
+import { StorageService } from './services/internal/storage.service';
 
 @NgModule({
   declarations: [AppComponent],
@@ -24,17 +25,21 @@ import { LeaveApiService } from './services/apis/leave.api.service';
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     {
       provide: AuthApiService,
-      useFactory: (pubSubService) => {
-        return new AuthApiService('/api/auth', pubSubService);
+      useFactory: (pubSubService, storageService) => {
+        return new AuthApiService('/api/auth', pubSubService, storageService);
       },
-      deps: [PubSubService],
+      deps: [PubSubService, StorageService],
     },
     {
       provide: LeaveApiService,
-      useFactory: (pubSubService) => {
-        return new LeaveApiService('/api/leaves', pubSubService);
+      useFactory: (pubSubService, storageService) => {
+        return new LeaveApiService(
+          '/api/leaves',
+          pubSubService,
+          storageService
+        );
       },
-      deps: [PubSubService],
+      deps: [PubSubService, StorageService],
     },
   ],
   bootstrap: [AppComponent],

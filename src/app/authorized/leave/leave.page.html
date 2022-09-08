@@ -2,61 +2,21 @@
   <div class="bg-gradient-1 leave-days-header">
     <top-bar-header #header white></top-bar-header>
     <p class="pl-16 page-title white" style="font-size: 30px">My Leave</p>
+
     <div #progress class="progress-group">
-      <div class="wrapper-circle" (click)="applyLeave()">
-        <div
-          class="circle-progress"
-          role="progressbar"
-          aria-valuenow="65"
-          aria-valuemin="0"
-          aria-valuemax="30"
-          style="--value: 30"
-        ></div>
-        <p>Annual</p>
-      </div>
-      <div class="wrapper-circle">
-        <div
-          class="circle-progress"
-          role="progressbar"
-          aria-valuenow="65"
-          aria-valuemin="0"
-          aria-valuemax="100"
-          style="--value: 30"
-        ></div>
-        <p>Medical</p>
-      </div>
-      <div class="wrapper-circle">
-        <div
-          class="circle-progress"
-          role="progressbar"
-          aria-valuenow="65"
-          aria-valuemin="0"
-          aria-valuemax="100"
-          style="--value: 30"
-        ></div>
-        <p>Emergency</p>
-      </div>
-      <div class="wrapper-circle">
-        <div
-          class="circle-progress"
-          role="progressbar"
-          aria-valuenow="65"
-          aria-valuemin="0"
-          aria-valuemax="100"
-          style="--value: 30"
-        ></div>
-        <p>Paternity</p>
-      </div>
-      <div class="wrapper-circle">
-        <div
-          class="circle-progress"
-          role="progressbar"
-          aria-valuenow="65"
-          aria-valuemin="0"
-          aria-valuemax="100"
-          style="--value: 30"
-        ></div>
-        <p>Public</p>
+      <div class="wrapper-circle" *ngFor="let leaveType of leaveTypes">
+        <circle-progress
+          [percent]="85"
+          [showUnits]="false"
+          [showSubtitle]="false"
+          [titleColor]="'#000000'"
+          [backgroundColor]="'#ffffff'"
+          [radius]="40"
+          [animation]="true"
+          [showInnerStroke]="false"
+          [animationDuration]="300"
+        ></circle-progress>
+        <p>{{leaveType.type}}</p>
       </div>
     </div>
   </div>

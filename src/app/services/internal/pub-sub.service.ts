@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
+import { StorageKeys } from '../storage-keys';
+import { StorageService } from './storage.service';
 
 @Injectable({
   providedIn: 'root',
@@ -9,7 +11,11 @@ export class PubSubService {
     isClosing: boolean;
     isNav: boolean;
   }>(null);
-  public token = new BehaviorSubject<string>(null);
+  public token: BehaviorSubject<string> = new BehaviorSubject<string>('');
 
-  constructor() {}
+  constructor(private storageService: StorageService) {
+    this.storageService.get(StorageKeys.TOKEN).then((res) => {
+      this.token.next(res);
+    });
+  }
 }

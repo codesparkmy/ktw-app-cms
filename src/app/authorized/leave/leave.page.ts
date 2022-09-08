@@ -30,7 +30,13 @@ export class LeavePage implements OnInit, AfterViewInit, OnDestroy {
   initBreakpoint = null;
   menuSubscriber?: Subscription;
 
-  leaveTypes = [];
+  leaveTypes = [
+    {
+      days: 14,
+      maxDays: 14,
+      type: 'Annual',
+    },
+  ];
   constructor(
     private platform: Platform,
     private pubSub: PubSubService,

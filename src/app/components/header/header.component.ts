@@ -29,8 +29,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
     private pubSubService: PubSubService
   ) {
     this.pubSubService.menuStateSubject.subscribe((z) => {
-      console.log(z);
-      this.menuIsOpened = z;
+      if (z) this.menuIsOpened = !z.isClosing;
     });
   }
 

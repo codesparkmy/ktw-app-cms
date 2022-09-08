@@ -1,35 +1,39 @@
+.leave-days-header {
+  padding-bottom: 30px;
+}
+
 .wrapper-circle {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 0.5rem;
   color: white;
   font-family: "Roboto";
+  margin-right: 22px;
+  p {
+    margin-top: 6px;
+    font-size: 14px;
+    font-family: 'Poppins';
+  }
 }
 
 .progress-group {
-  height: 123px;
-  display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  gap: 1.5rem;
+  display: flex;
   padding-left: 16px;
   margin-top: 16px;
   overflow-x: scroll;
   padding-right: 16px;
 }
 
-/* Hide scrollbar for Chrome, Safari and Opera */
-.progress-group::-webkit-scrollbar {
-  display: none;
+.wrapper-circle:last-child {
+  margin-right: 0;
 }
 
-/* Hide scrollbar for IE, Edge and Firefox */
 .progress-group {
-  -ms-overflow-style: none;  /* IE and Edge */
-  scrollbar-width: none;  /* Firefox */
-}
-
-.circle-progress:last-child {
+  &::-webkit-scrollbar {
+    display: none;
+  }
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }
 
 @keyframes growProgressBar {
@@ -49,11 +53,11 @@
 }
 
 div[role="progressbar"] {
-  --size: 6rem;
+  --size: 4.3rem;
   --fg: #ffb20a;
   --bg: #fff;
   --pgPercentage: var(--value);
-  animation: growProgressBar 3s 1 forwards;
+  animation: growProgressBar 1s 1 forwards;
   width: var(--size);
   height: var(--size);
   border-radius: 50%;
@@ -67,11 +71,120 @@ div[role="progressbar"] {
     ),
     conic-gradient(var(--fg) calc(var(--pgPercentage) * 1%), var(--bg) 0);
   font-family: "Roboto";
-  font-size: calc(var(--size) / 5);
+  font-size: 16px;
   color: var(--fg);
 }
 
 div[role="progressbar"]::before {
   counter-reset: percentage var(--value);
   content: counter(percentage);
+}
+
+.wrapper-leave-list {
+  margin-top: -20px;
+  background-color: white;
+  border-radius: 10px 10px 0 0;
+
+  .title-modal {
+    font-family: "Roboto";
+    font-size: 18px;
+    font-weight: 500;
+  }
+
+  .wrapper-leave-status {
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+  }
+
+  .wrapper-leave-header {
+    display: flex;
+    flex-flow: column;
+    margin-top: 10px;
+    margin-bottom: 22px;
+    .apply-leave-btn {
+      margin-top: 12px;
+      padding: 12px;
+      background-color: #357bf3;
+      color: white;
+      border-radius: 16px;
+      p {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-family: "Roboto";
+        ion-icon {
+          margin-right: 5px;
+          font-size: 20px;
+        }
+      }
+    }
+  }
+
+  .leave {
+    width: 100%;
+    display: flex;
+    flex-flow: row;
+
+    .box-date {
+      border-radius: 0 10px 10px 0;
+      font-family: "Roboto";
+      font-size: 14px;
+      font-weight: 500;
+      display: flex;
+      flex-flow: column;
+      padding: 0 5px;
+      justify-content: center;
+      text-align: center;
+      width: 50px;
+    }
+
+    .leave-details {
+      display: flex;
+      flex-flow: column;
+      min-height: 100px;
+      padding: 8px 13px;
+    }
+
+    &.leave-reject {
+      .box-date {
+        background: black;
+        color: white;
+      }
+    }
+
+    &.leave-approve {
+      .box-date {
+        background: linear-gradient(150deg, #7001dc, #a826c7);
+        color: white;
+      }
+    }
+
+    &.leave-pending {
+      .box-date {
+        background: #ededed;
+        color: white;
+      }
+    }
+  }
+
+  .leave-type {
+    font-family: "Roboto";
+    font-size: 14px;
+    font-weight: bold;
+  }
+
+  .reason-leave {
+    font-family: "Roboto";
+    font-size: 16px;
+    margin-top: 8px;
+  }
+
+  .leave-status {
+    font-size: 16px;
+    font-weight: 500;
+    height: 20px;
+    margin-top: auto;
+  }
 }

@@ -15,6 +15,7 @@ import {
   Platform,
 } from '@ionic/angular';
 import { Subscription } from 'rxjs';
+import { LeaveApiService } from 'src/app/services/apis/leave.api.service';
 import { PubSubService } from 'src/app/services/internal/pub-sub.service';
 
 @Component({
@@ -28,20 +29,21 @@ export class LeavePage implements OnInit, AfterViewInit, OnDestroy {
   @ViewChild('header') header;
   breakpoint = null;
   initBreakpoint = null;
-  presentingElement = null;
   menuSubscriber?: Subscription;
 
   constructor(
     private platform: Platform,
-    private modalController: ModalController,
-    private pubSub: PubSubService
+    private pubSub: PubSubService,
+    private leaveApiService: LeaveApiService
   ) {}
 
   ngOnInit() {
-    this.presentingElement = document.querySelector('#leave-content');
+    this.leaveApiService.getSummaries().then((res) => {
+      console.log(res.data);
+    });
     this.menuSubscriber = this.pubSub.menuStateSubject.subscribe((z) => {
       if (this.modal) {
-        if (z) this.modal.dismiss();
+        if (z.isNav || z.isClosing) this.modal.dismiss();
         else this.modal.present();
       }
     });
@@ -57,12 +59,12 @@ export class LeavePage implements OnInit, AfterViewInit, OnDestroy {
         1 -
         (this.progress.nativeElement.offsetTop +
           this.progress.nativeElement.clientHeight +
-          70) /
+          20) /
           this.platform.height();
       var bp = Math.round(percentage * 100) / 100;
       this.breakpoint = [bp, 0.95];
       this.initBreakpoint = bp;
-    });
+    }, 300);
   }
 
   ionViewWillLeave() {
@@ -71,5 +73,9 @@ export class LeavePage implements OnInit, AfterViewInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.menuSubscriber.unsubscribe();
+  }
+
+  isScrolling($evnt) {
+    console.log($evnt);
   }
 }

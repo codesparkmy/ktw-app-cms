@@ -1,22 +1,32 @@
 <ion-content>
   <div class="full-page">
     <div class="bg">
-      <img class="bg-1" src="../../assets/svgs/1.svg" alt="">
-      <img class="bg-2" src="../../assets/svgs/2.svg" alt="">
-      <img class="bg-3" src="../../assets/svgs/3.svg" alt="">
-      <img class="bg-4" src="../../assets/svgs/4.svg" alt="">
+      <img class="bg-1" src="../../assets/svgs/1.svg" alt="" />
+      <img class="bg-2" src="../../assets/svgs/2.svg" alt="" />
+      <img class="bg-3" src="../../assets/svgs/3.svg" alt="" />
+      <img class="bg-4" src="../../assets/svgs/4.svg" alt="" />
     </div>
     <div class="form">
       <img src="../../assets/images/logo.png" alt="" />
       <p class="login-title">Log In</p>
       <ion-row>
         <ion-col size="12" class="ion-text-center">
-          <input type="text" class="form-input" placeholder="Email Address" />
+          <input
+            type="text"
+            class="form-input"
+            placeholder="Email Address"
+            [(ngModel)]="user.email"
+          />
         </ion-col>
         <ion-col size="12" class="ion-text-center">
-          <input type="password" class="form-input" placeholder="Password" />
+          <input
+            type="password"
+            class="form-input"
+            placeholder="Password"
+            [(ngModel)]="user.password"
+          />
         </ion-col>
-        <ion-col size="12" class="ion-text-center">
+        <ion-col size="12" class="ion-text-center" (click)="login()">
           <div class="btn">Login</div>
         </ion-col>
       </ion-row>

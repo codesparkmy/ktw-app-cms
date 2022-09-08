@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
-import { MenuController } from '@ionic/angular';
+import { IonMenu, MenuController } from '@ionic/angular';
 import { PubSubService } from '../services/internal/pub-sub.service';
 
 @Component({
@@ -8,26 +8,37 @@ import { PubSubService } from '../services/internal/pub-sub.service';
   templateUrl: './authorized.page.html',
   styleUrls: ['./authorized.page.scss'],
 })
-export class AuthorizedPage implements OnInit {
-  constructor(
-    private pubSubService: PubSubService,
-    private router: Router,
-    private menuController: MenuController
-  ) {}
+export class AuthorizedPage implements OnInit, AfterViewInit {
+  @ViewChild('menu') menu: IonMenu;
+
+  isNavigated = false;
+  constructor(private pubSubService: PubSubService, private router: Router) {}
 
   ngOnInit() {
-    this.router.events.subscribe((z) => {
+    this.router.events.subscribe(async (z) => {
       if (z instanceof NavigationEnd) {
-        this.menuController.close();
+        this.isNavigated = true;
+        this.menu.close();
       }
     });
   }
 
+  ngAfterViewInit(): void {
+  }
+
   menuIsOpening() {
-    this.pubSubService.menuStateSubject.next(true);
+    this.pubSubService.menuStateSubject.next({
+      isClosing: false,
+      isNav: false,
+    });
   }
 
   menuIsClosing() {
-    this.pubSubService.menuStateSubject.next(false);
+    this.pubSubService.menuStateSubject.next({
+      isClosing: true,
+      isNav: this.isNavigated,
+    });
+
+    this.isNavigated = false;
   }
 }

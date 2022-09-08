@@ -9,3 +9,16 @@ ion-content.bg-gradient-1 {
 ion-content.bg-gradient-2 {
   --background: linear-gradient(155deg, #6e00dd, #a826c7);
 }
+
+.action-btn {
+  background: linear-gradient(150deg, #7001dc, #a826c7);
+  padding: 10px;
+  color: white;
+  margin: 0px 14px 14px 10px;
+  border-radius: 20px;
+  text-align: center;
+  box-shadow: rgb(171 184 248 / 20%) 0 -25px 18px -14px inset,
+    rgb(179 143 255 / 15%) 0 1px 2px, rgb(189 96 255 / 15%) 0 2px 4px,
+    rgb(44 187 99 / 15%) 0 4px 8px, rgb(172 136 255 / 15%) 0 8px 16px,
+    rgb(30 0 100 / 15%) 0 16px 32px;
+}

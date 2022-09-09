@@ -8,15 +8,16 @@ import { ApplyLeavePageRoutingModule } from './apply-leave-routing.module';
 
 import { ApplyLeavePage } from './apply-leave.page';
 import { HeaderComponent } from 'src/app/components/header/header.component';
-import { PopupSelectComponent } from 'src/app/components/popup-select/popup-select.component';
+import { PopupSelectComponentModule } from 'src/app/components/popup-select/popup-select.module';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    ApplyLeavePageRoutingModule
+    ApplyLeavePageRoutingModule,
+    PopupSelectComponentModule
   ],
-  declarations: [ApplyLeavePage,HeaderComponent,PopupSelectComponent]
+  declarations: [ApplyLeavePage,HeaderComponent]
 })
 export class ApplyLeavePageModule {}

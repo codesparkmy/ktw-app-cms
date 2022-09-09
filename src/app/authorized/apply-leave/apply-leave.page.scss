@@ -1,11 +1,18 @@
 .multiLineText {
-  border: 1px black solid;
+  border: 1px solid #a8a8a8;
   height: 20rem;
+  border-radius: 10px;
+}
+
+.input-title {
+  font-size: 12px;
+  margin-bottom: 2px;
 }
 
 .camera-container {
-  border: 1px black solid;
+  border: 1px solid #a8a8a8;
   display: grid;
+  border-radius: 10px;
 }
 
 .camera-icon {
@@ -14,7 +21,7 @@
 }
 
 .calendar-container {
-  border: 1px black solid;
+  border: 1px solid #a8a8a8;
   display: grid;
   padding: 5px;
   grid-template-columns: 3fr 1fr;
@@ -46,17 +53,3 @@
   line-height: 35px;
 }
 
-.apply-btn {
-  background: linear-gradient(336deg, rgba(168, 38, 199, 1) 35%, #6e00dd 100%);
-  display: flex;
-  border-radius: 4px;
-  padding: 10px;
-
-  .apply-txt {
-    font-family: "Roboto";
-    font-size: 22px;
-    color: white;
-    font-weight: 500;
-    margin: auto;
-  }
-}

@@ -57,7 +57,7 @@ export class LeavePage implements OnInit, AfterViewInit, OnDestroy {
   ionViewWillLeave() {}
 
   ngOnDestroy(): void {
-    this.menuSubscriber.unsubscribe();
+    this.menuSubscriber?.unsubscribe();
   }
 
   isScrolling($evnt) {

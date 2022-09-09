@@ -12,6 +12,8 @@ import { PubSubService } from './services/internal/pub-sub.service';
 import { BaseApiService } from './services/apis/base.api.service';
 import { LeaveApiService } from './services/apis/leave.api.service';
 import { StorageService } from './services/internal/storage.service';
+import { EventApiService } from './services/apis/event.api.service';
+import { OutletsApiService } from './services/apis/outlets.api.service';
 
 @NgModule({
   declarations: [AppComponent],
@@ -35,6 +37,28 @@ import { StorageService } from './services/internal/storage.service';
       useFactory: (pubSubService, storageService) => {
         return new LeaveApiService(
           '/api/leaves',
+          pubSubService,
+          storageService
+        );
+      },
+      deps: [PubSubService, StorageService],
+    },
+    {
+      provide: EventApiService,
+      useFactory: (pubSubService, storageService) => {
+        return new EventApiService(
+          '/api/events',
+          pubSubService,
+          storageService
+        );
+      },
+      deps: [PubSubService, StorageService],
+    },
+    {
+      provide: OutletsApiService,
+      useFactory: (pubSubService, storageService) => {
+        return new OutletsApiService(
+          '/api/outlets',
           pubSubService,
           storageService
         );

@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, NgZone, OnInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 
 @Component({
@@ -7,13 +7,22 @@ import { ModalController } from '@ionic/angular';
   styleUrls: ['./popup-select-items.component.scss'],
 })
 export class PopupSelectItemsComponent implements OnInit {
-  @Input() modal_title:string;
-  @Input() options:object[];
-  constructor(private modalController: ModalController) {}
+  @Input() modalTitle: string;
+  @Input() options: object[];
+  @Input('itemTitle') itemTitle;
+  @Input('itemValue') itemValue;
+  constructor(private modalController: ModalController, private zone: NgZone) {}
 
   ngOnInit() {}
 
   cancel() {
     this.modalController.dismiss('', 'cancel');
+  }
+
+  selectItem(option) {
+    this.modalController.dismiss(
+      this.itemValue ? option[this.itemValue] : option,
+      'selected'
+    );
   }
 }

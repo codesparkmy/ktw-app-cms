@@ -8,6 +8,6 @@ import { PopupSelectItemsComponent } from '../popup-select-items/popup-select-it
 @NgModule({
   imports: [CommonModule, FormsModule, IonicModule],
   declarations: [PopupSelectItemsComponent],
-  exports : [PopupSelectItemsComponent]
+  exports: [PopupSelectItemsComponent],
 })
 export class PopupSelectItemsComponentModule {}

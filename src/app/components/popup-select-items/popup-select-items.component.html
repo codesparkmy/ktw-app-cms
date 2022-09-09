@@ -1,12 +1,18 @@
 <ion-header class="ion-no-border">
   <ion-toolbar>
-    <ion-title>{{ modal_title }}</ion-title>
+    <ion-title>{{ modalTitle }}</ion-title>
   </ion-toolbar>
 </ion-header>
 <ion-content>
   <ion-list class="popup-select-list">
-    <ion-item lines="none" button class="selected" *ngFor="option of options">
-      <ion-label class="">{{option.title}}</ion-label>
+    <ion-item
+      lines="none"
+      button
+      class=""
+      (click)="selectItem(option)"
+      *ngFor="let option of options"
+    >
+      <ion-label class="">{{ option[itemTitle] }}</ion-label>
     </ion-item>
   </ion-list>
 </ion-content>

@@ -1,4 +1,11 @@
-import { Component, Input, OnInit } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  NgZone,
+  OnInit,
+  Output,
+} from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { PopupSelectItemsComponent } from '../popup-select-items/popup-select-items.component';
 
@@ -8,27 +15,40 @@ import { PopupSelectItemsComponent } from '../popup-select-items/popup-select-it
   styleUrls: ['./popup-select.component.scss'],
 })
 export class PopupSelectComponent implements OnInit {
-  @Input() title;
-  @Input() options;
-  constructor(private modalController: ModalController) {}
+  @Input('title') title;
+  @Input('options') options;
+  @Input('itemTitle') itemTitle;
+  @Input('itemValue') itemValue;
+  @Input('placeholder') placeholder;
+  @Output('itemSelected') itemSelectedEmitter: EventEmitter<any> =
+    new EventEmitter<any>();
 
-  ngOnInit() {
-    console.log('options :: ', this.options);
-  }
+  selected = null;
+  constructor(private modalController: ModalController, private zone: NgZone) {}
 
-  openModal() {
-    this.modalController
-      .create({
-        component: PopupSelectItemsComponent,
-        showBackdrop: true,
-        cssClass: 'popup-select-items',
-        componentProps: {
-          modal_title: this.title,
-          options: this.options,
-        },
-      })
-      .then((res) => {
-        res.present();
-      });
+  ngOnInit() {}
+
+  async openModal() {
+    var modal = await this.modalController.create({
+      component: PopupSelectItemsComponent,
+      showBackdrop: true,
+      cssClass: 'popup-select-items',
+      componentProps: {
+        modalTitle: this.title,
+        options: this.options,
+        itemTitle: this.itemTitle,
+        itemValue: this.itemValue,
+      },
+    });
+    modal.present();
+
+    modal.onDidDismiss().then((res) => {
+      if (res.role == 'selected') {
+        this.itemSelectedEmitter.emit(res.data);
+        this.zone.run(() => {
+          this.selected = this.itemTitle ? res.data[this.itemTitle] : res.data;
+        });
+      }
+    });
   }
 }

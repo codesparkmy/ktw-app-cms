@@ -2,7 +2,13 @@
   <top-bar-header></top-bar-header>
   <p class="pl-16 page-title">Events</p>
   <div class="px-4 mt-3">
-    <popup-select></popup-select>
+    <popup-select
+      title="Outlets"
+      [options]="outlets"
+      itemTitle="name"
+      (itemSelected)="outletSelected($event)"
+      placeholder="Select an Outlet"
+    ></popup-select>
   </div>
   <div class="mt-4">
     <event-big-card></event-big-card>

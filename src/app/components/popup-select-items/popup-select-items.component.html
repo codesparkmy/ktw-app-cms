@@ -13,7 +13,7 @@
       *ngFor="let option of options; let i = index"
       [ngClass]="{ selected: selectedIndex == i }"
     >
-      <ion-label class="">{{ option[itemTitle] }}</ion-label>
+      <ion-label class="">{{option.title}}</ion-label>
     </ion-item>
   </ion-list>
 </ion-content>

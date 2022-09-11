@@ -1,4 +1,6 @@
 import { Component, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { NavController } from '@ionic/angular';
 
 @Component({
   selector: 'app-chat-message',
@@ -6,10 +8,17 @@ import { Component, OnChanges, OnInit, SimpleChanges } from '@angular/core';
   styleUrls: ['./chat-message.page.scss'],
 })
 export class ChatMessagePage implements OnInit {
-  constructor() {}
+  user: string;
+  constructor(private route: ActivatedRoute, private navCtrl: NavController) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    console.log(this.route.snapshot);
+    this.user = this.route.snapshot.params.id;
+  }
 
-  send(){
+  send() {}
+
+  backClicked() {
+    this.navCtrl.back()
   }
 }

@@ -1,6 +1,6 @@
 <ion-content class="content">
   <div class="chat-header">
-    <ion-icon class="back-btn" name="chevron-back-outline"></ion-icon>
+    <ion-icon class="back-btn" name="chevron-back-outline" (click)="backClicked()"></ion-icon>
     <div class="wrapper-avatar">
       <ion-avatar class="avatar">
         <img
@@ -10,7 +10,7 @@
       <div class="active"></div>
     </div>
     <div class="wrapper-text-name">
-      <p class="name">Angelina Fox</p>
+      <p class="name">{{user}}</p>
       <p class="status">Online</p>
     </div>
   </div>

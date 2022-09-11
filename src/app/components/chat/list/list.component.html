@@ -1,2 +1,4 @@
-<chat-item></chat-item>
+<div *ngFor="let message of messageList" [routerLink]="[ '/members/chat-message', message.user ]">
+    <chat-item [user]="message"></chat-item>
+</div>
 <div class="divider"></div>

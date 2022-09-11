@@ -13,8 +13,7 @@ export class PopupSelectItemsComponent implements OnInit {
   @Input('itemValue') itemValue;
   constructor(private modalController: ModalController, private zone: NgZone) {}
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
   cancel() {
     this.modalController.dismiss('', 'cancel');

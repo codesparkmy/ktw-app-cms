@@ -26,7 +26,9 @@ export class PopupSelectComponent implements OnInit {
   selected = null;
   constructor(private modalController: ModalController, private zone: NgZone) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.selected = this.options[0].title;
+  }
 
   async openModal() {
     var modal = await this.modalController.create({
@@ -46,7 +48,7 @@ export class PopupSelectComponent implements OnInit {
       if (res.role == 'selected') {
         this.itemSelectedEmitter.emit(res.data);
         this.zone.run(() => {
-          this.selected = this.itemTitle ? res.data[this.itemTitle] : res.data;
+          this.selected = res ? res.data.title : "";
         });
       }
     });

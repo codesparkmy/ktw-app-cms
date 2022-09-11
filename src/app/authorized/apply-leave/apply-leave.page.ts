@@ -36,7 +36,7 @@ export class ApplyLeavePage implements OnInit {
   }
 
   backClicked() {
-    this.navCtrl.back();
+    this.navCtrl.navigateBack('/members/leave');
   }
 
   endDateChanged(value) {

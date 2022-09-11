@@ -40,6 +40,7 @@
   margin-top: -20px;
   background-color: white;
   border-radius: 10px 10px 0 0;
+  position: relative;
 
   .title-modal {
     font-family: "Roboto";
@@ -82,6 +83,8 @@
     width: 100%;
     display: flex;
     flex-flow: row;
+    margin-bottom: 15px;
+    min-height: 130px;
 
     .box-date {
       border-radius: 0 10px 10px 0;
@@ -93,7 +96,7 @@
       padding: 0 5px;
       justify-content: center;
       text-align: center;
-      width: 50px;
+      width: 60px;
       min-height: 110px;
     }
 
@@ -101,7 +104,9 @@
       display: flex;
       flex-flow: column;
       min-height: 100px;
-      padding: 8px 13px;
+      padding: 8px 20px;
+      padding-right: 25px;
+      width: 100%;
     }
 
     &.leave-reject {
@@ -121,14 +126,14 @@
     &.leave-pending {
       .box-date {
         background: #ededed;
-        color: white;
+        color: black;
       }
     }
   }
 
   .leave-type {
     font-family: "Roboto";
-    font-size: 14px;
+    font-size: 16px;
     font-weight: bold;
   }
 
@@ -140,8 +145,26 @@
 
   .leave-status {
     font-size: 16px;
-    font-weight: 500;
     height: 20px;
     margin-top: auto;
+    text-transform: capitalize;
+    display: grid;
+    grid-template-columns: 0.5fr 1fr 3fr;
+
+    .leave-action-btn {
+      justify-self: end;
+      line-height: 23px;
+      font-family: "Roboto";
+      font-weight: 500;
+    }
+
+    .status-icon {
+      font-size: 24px;
+    }
+
+    .status-text {
+      line-height: 23px;
+      font-size: 14px;
+    }
   }
 }

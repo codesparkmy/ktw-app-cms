@@ -16,6 +16,7 @@ import { EventApiService } from './services/apis/event.api.service';
 import { OutletsApiService } from './services/apis/outlets.api.service';
 import { MinuteToTimePipe } from './pipes/minute-to-time.pipe';
 import { EventImageApiService } from './services/apis/event-image.api.service';
+import { ProfileApiService } from './services/apis/profile.api.service';
 
 @NgModule({
   declarations: [AppComponent],
@@ -72,6 +73,17 @@ import { EventImageApiService } from './services/apis/event-image.api.service';
       useFactory: (pubSubService, storageService) => {
         return new EventImageApiService(
           '/api/event-images',
+          pubSubService,
+          storageService
+        );
+      },
+      deps: [PubSubService, StorageService],
+    },
+    {
+      provide: ProfileApiService,
+      useFactory: (pubSubService, storageService) => {
+        return new ProfileApiService(
+          '/api/users',
           pubSubService,
           storageService
         );

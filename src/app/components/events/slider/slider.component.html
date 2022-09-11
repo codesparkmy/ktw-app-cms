@@ -1,13 +1,7 @@
 <ion-slides pager="false" [options]="slidesOptions">
-  <ion-slide>
-    <event-card></event-card>
-  </ion-slide>
-  <ion-slide>
-    <event-card></event-card>
-  </ion-slide>
-  <ion-slide>
-    <event-card></event-card>
+  <ion-slide *ngFor="let event of events">
+    <event-card [event]="event"></event-card>
   </ion-slide>
 </ion-slides>
 
-<p class="more-events">More Events</p>
+<p class="more-events" [routerLink]="['/members/events']">More Events</p>

@@ -2,10 +2,18 @@
   <top-bar-header>
     <div
       class="ion-activatable edit-button"
-      
+      (click)="isEditing ? save() : edit()"
     >
       <ion-ripple-effect type="bounded"></ion-ripple-effect>
-      <ion-icon name="create-outline" style="font-size: 30px"></ion-icon>
+      <ng-container *ngIf="isEditing; else editButton">
+        <ion-icon
+          name="checkmark-circle-outline"
+          style="font-size: 33px"
+        ></ion-icon>
+      </ng-container>
+      <ng-template #editButton>
+        <ion-icon name="create-outline" style="font-size: 30px"></ion-icon>
+      </ng-template>
     </div>
   </top-bar-header>
 
@@ -13,34 +21,76 @@
     <div class="profile-picture">
       <img
         class="avatar-circle"
-        src="../../../assets/images/profile-picture.jpeg"
+        [src]="profile?.avatarImage ? baseApiUrl + '/uploads/avatar/' + profile?.avatarImage :  baseApiUrl + '/uploads/avatar/default.jpg'"
       />
-      <div class="camera-btn">
+      <div class="camera-btn" (click)="getPicture()">
         <ion-icon slot="icon-only" name="camera"></ion-icon>
       </div>
     </div>
-    <p class="profile-name">Daniel Rezeki</p>
-    <div class="profile-list">
-      <div class="items">
-        <p class="item title">Username</p>
-        <p class="item content">Daniel Rezeki</p>
+    <ng-container *ngIf="isEditing; else showTemplate">
+      <div class="profile-editor" *ngIf="profileEdit">
+        <div class="input">
+          <label for="" class="custom-label">Name</label>
+          <input
+            type="text"
+            class="custom-input"
+            [(ngModel)]="profileEdit.name"
+            placeholder="Enter your name here"
+          />
+        </div>
+        <div class="input">
+          <label for="" class="custom-label">Phone Number</label>
+          <input
+            type="tel"
+            class="custom-input"
+            [(ngModel)]="profileEdit.phoneNumber"
+            placeholder="Enter your phone number here"
+          />
+        </div>
+        <div class="input">
+          <label for="" class="custom-label">Email</label>
+          <input
+            type="email"
+            class="custom-input"
+            [value]="profileEdit.email"
+            disabled
+          />
+        </div>
+        <div class="input">
+          <label for="" class="custom-label">Outlet</label>
+          <input
+            type="email"
+            class="custom-input"
+            [value]="profileEdit.outlet.name"
+            disabled
+          />
+        </div>
       </div>
-      <div class="items">
-        <p class="item title">Email</p>
-        <p class="item content">daniel.rezeki@gmail.com</p>
+    </ng-container>
+    <ng-template #showTemplate>
+      <p class="profile-name">{{profile?.name}}</p>
+      <div class="profile-list">
+        <div class="items">
+          <p class="item title">Username</p>
+          <p class="item content">{{profile?.name}}</p>
+        </div>
+        <div class="items">
+          <p class="item title">Phone Number</p>
+          <p class="item content">{{profile?.phoneNumber}}</p>
+        </div>
+        <div class="items">
+          <p class="item title">Email</p>
+          <p class="item content">{{profile?.email}}</p>
+        </div>
+        <div class="items">
+          <p class="item title">Outlet</p>
+          <p class="item content">{{profile?.outlet.name}}</p>
+        </div>
+        <div class="items">
+          <p class="item title">Status Membership</p>
+          <p class="item content">Active</p>
+        </div>
       </div>
-      <div class="items">
-        <p class="item title">Location</p>
-        <p class="item content">Besut, Pahang</p>
-      </div>
-      <div class="items">
-        <p class="item title">Phone Number</p>
-        <p class="item content">012-34567895</p>
-      </div>
-      <div class="items">
-        <p class="item title">Status Membership</p>
-        <p class="item content">Active</p>
-      </div>
-    </div>
+    </ng-template>
   </div>
 </ion-content>

@@ -1,24 +1,32 @@
 <div class="event-card">
   <div
+    [routerLink]="['/members/event-detail/', event.id]"
     class="event-card-inner"
-    style="
-      background-image: url('/assets/images/sample-image (2).jpg');
-      background-size: cover;
+    style="background-size: cover"
+    [style.background-image]="
+      'url(' +
+      baseApiUrl +
+      '/uploads/eventImages/' +
+      highlightImage?.fileId +
+      ')'
     "
   >
+    <div class="backdrop"></div>
     <div class="time-location">
       <div class="time">
-        <ion-icon slot="icon-only" name="time"></ion-icon>
-        <p>22:00</p>
+        <ion-icon slot="icon-only" name="calendar"></ion-icon>
+        <p>
+          {{ event?.eventDateFrom | date }} - {{ event?.eventDateTo | date }}
+        </p>
       </div>
       <div class="location">
         <ion-icon slot="icon-only" name="location"></ion-icon>
-        <p>22:00</p>
+        <p>{{ event?.hostedAt }}</p>
       </div>
     </div>
     <div class="header">
-      <p class="title">Conference A</p>
-      <p class="subtitle">by John Smith</p>
+      <p class="title">{{ event.title }}</p>
+      <p class="subtitle">by {{ event.hostedBy }}</p>
     </div>
   </div>
 </div>

@@ -22,4 +22,12 @@ export class EventApiService extends BaseApiService {
     await this.init();
     return await this.axiosInstance.get('by-id/' + eventId);
   }
+
+  async getEventByMonth(outlet, month, year) {
+    await this.init();
+    return await this.axiosInstance.post('by-month/' + outlet, {
+      month,
+      year,
+    });
+  }
 }

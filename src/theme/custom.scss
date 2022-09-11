@@ -10,6 +10,10 @@ ion-content.bg-gradient-2 {
   --background: linear-gradient(155deg, #6e00dd, #a826c7);
 }
 
+.bg-gradient-2 {
+  background: linear-gradient(155deg, #6e00dd, #a826c7);
+}
+
 .action-btn {
   background: linear-gradient(150deg, #7001dc, #a826c7);
   padding: 10px;
@@ -21,4 +25,23 @@ ion-content.bg-gradient-2 {
     rgb(179 143 255 / 15%) 0 1px 2px, rgb(189 96 255 / 15%) 0 2px 4px,
     rgb(44 187 99 / 15%) 0 4px 8px, rgb(172 136 255 / 15%) 0 8px 16px,
     rgb(30 0 100 / 15%) 0 16px 32px;
+}
+
+.custom-input {
+  border: 1px solid #a8a8a8;
+  border-radius: 10px;
+  background: transparent;
+  width: 100%;
+  padding: 10px 16px;
+  font-family: "Roboto";
+  font-size: 18px;
+
+  &:disabled {
+    background-color: rgba(0, 0, 0, 0.1);
+  }
+}
+
+.custom-label {
+  font-family: "Poppins";
+  font-size: 14px;
 }

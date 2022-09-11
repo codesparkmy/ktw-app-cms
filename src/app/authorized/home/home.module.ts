@@ -10,6 +10,7 @@ import { HomePage } from './home.page';
 import { HeaderComponent } from 'src/app/components/header/header.component';
 import { EventSliderComponentModule } from 'src/app/components/events/slider/slider.module';
 import { ChatListComponentModule } from 'src/app/components/chat/list/list.module';
+import { MinuteToTimePipe } from 'src/app/pipes/minute-to-time.pipe';
 
 @NgModule({
   imports: [

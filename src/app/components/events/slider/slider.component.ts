@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { EventApiService } from 'src/app/services/apis/event.api.service';
+import { OutletsApiService } from 'src/app/services/apis/outlets.api.service';
+import { StorageService } from 'src/app/services/internal/storage.service';
 
 @Component({
   selector: 'events-slider',
@@ -14,8 +17,25 @@ export class SliderComponent implements OnInit {
     spaceBetween: 0,
     centeredSlides: true,
   };
+  events = [];
+  outlets = [];
 
-  constructor() {}
+  constructor(
+    private outletApiService: OutletsApiService,
+    private storageService: StorageService,
+    private EventApiService: EventApiService
+  ) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.storageService.decodeToken().then((token) => {
+      this.getEventsByOutletId(token.outlet);
+    });
+  }
+
+  getEventsByOutletId(outletId) {
+    this.EventApiService.getEventsByOutlet(outletId).then((res) => {
+      this.events = res.data;
+      console.log(this.events);
+    });
+  }
 }

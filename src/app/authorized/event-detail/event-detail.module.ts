@@ -9,6 +9,7 @@ import { EventDetailPageRoutingModule } from './event-detail-routing.module';
 import { EventDetailPage } from './event-detail.page';
 import { HeaderComponent } from 'src/app/components/header/header.component';
 import { EventDetailModalDetailComponent } from 'src/app/components/event-detail-modal-detail/event-detail-modal-detail.component';
+import { MinuteToTimePipe } from 'src/app/pipes/minute-to-time.pipe';
 
 @NgModule({
   imports: [
@@ -17,7 +18,11 @@ import { EventDetailModalDetailComponent } from 'src/app/components/event-detail
     IonicModule,
     EventDetailPageRoutingModule,
   ],
-  declarations: [EventDetailPage, HeaderComponent,EventDetailModalDetailComponent],
+  declarations: [
+    EventDetailPage,
+    HeaderComponent,
+    EventDetailModalDetailComponent,
+    MinuteToTimePipe,
+  ],
 })
-
 export class EventDetailPageModule {}

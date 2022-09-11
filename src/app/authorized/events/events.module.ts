@@ -12,6 +12,7 @@ import { PopupSelectComponent } from 'src/app/components/popup-select/popup-sele
 import { EventBigCardComponent } from 'src/app/components/events/big-card/big-card.component';
 import { PopupSelectComponentModule } from 'src/app/components/popup-select/popup-select.module';
 import { PopupSelectItemsComponentModule } from 'src/app/components/popup-select-items/popup-select-items.module';
+import { MinuteToTimePipe } from 'src/app/pipes/minute-to-time.pipe';
 
 @NgModule({
   imports: [
@@ -21,6 +22,11 @@ import { PopupSelectItemsComponentModule } from 'src/app/components/popup-select
     EventsPageRoutingModule,
     PopupSelectComponentModule,
   ],
-  declarations: [EventsPage, HeaderComponent, EventBigCardComponent],
+  declarations: [
+    EventsPage,
+    HeaderComponent,
+    EventBigCardComponent,
+    MinuteToTimePipe,
+  ],
 })
 export class EventsPageModule {}

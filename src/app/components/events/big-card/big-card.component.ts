@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'event-big-card',
@@ -6,9 +6,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./big-card.component.scss'],
 })
 export class EventBigCardComponent implements OnInit {
-
-  constructor() { }
+  @Input('event') event;
+  constructor() {}
 
   ngOnInit() {}
-
 }

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { StorageKeys } from '../storage-keys';
 import { Storage } from '@ionic/storage-angular';
-
+import jwt_decode from 'jwt-decode';
 @Injectable({
   providedIn: 'root',
 })
@@ -28,5 +28,14 @@ export class StorageService {
   public async clear() {
     await this.init();
     this._storage.clear();
+  }
+
+  public async decodeToken(): Promise<any> {
+    var token = await this.get(StorageKeys.TOKEN);
+    if (token) {
+      return jwt_decode(token);
+    } else {
+      return null;
+    }
   }
 }

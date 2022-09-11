@@ -4,7 +4,7 @@ import { StorageService } from '../internal/storage.service';
 import { BaseApiService, HELPER_TYPE } from './base.api.service';
 
 @Injectable()
-export class EventApiService extends BaseApiService {
+export class EventImageApiService extends BaseApiService {
   constructor(
     @Inject(HELPER_TYPE) subUrl: string,
     pubSubService: PubSubService,
@@ -13,13 +13,8 @@ export class EventApiService extends BaseApiService {
     super(subUrl, pubSubService, storageService);
   }
 
-  async getEventsByOutlet(outlet) {
+  async getEventImagesByEventId(eventId) {
     await this.init();
-    return await this.axiosInstance.get('by-outlet/' + outlet);
-  }
-
-  async getEventById(eventId) {
-    await this.init();
-    return await this.axiosInstance.get('by-id/' + eventId);
+    return await this.axiosInstance.get('by-event/' + eventId);
   }
 }

@@ -6,12 +6,16 @@
       title="Outlets"
       [options]="outlets"
       itemTitle="name"
-      (itemSelected)="outletSelected($event)"
+      itemValue="id"
+      [(selected)]="selectedOutlet"
+      (onSelect)="onOutletSelect($event)"
       placeholder="Select an Outlet"
     ></popup-select>
   </div>
   <div class="mt-4">
-    <event-big-card></event-big-card>
-    <event-big-card></event-big-card>
+    <event-big-card
+      *ngFor="let event of events"
+      [event]="event"
+    ></event-big-card>
   </div>
 </ion-content>

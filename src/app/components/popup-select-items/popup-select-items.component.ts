@@ -11,9 +11,15 @@ export class PopupSelectItemsComponent implements OnInit {
   @Input() options: object[];
   @Input('itemTitle') itemTitle;
   @Input('itemValue') itemValue;
+  @Input('selected') selected;
+
+  selectedIndex = null;
   constructor(private modalController: ModalController, private zone: NgZone) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    if (this.selected)
+      this.selectedIndex = this.options.findIndex((z) => z == this.selected);
+  }
 
   cancel() {
     this.modalController.dismiss('', 'cancel');

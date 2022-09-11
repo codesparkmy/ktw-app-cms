@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { EventImageApiService } from 'src/app/services/apis/event-image.api.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'event-detail-modal',
@@ -6,9 +8,9 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./event-detail-modal-detail.component.scss'],
 })
 export class EventDetailModalDetailComponent implements OnInit {
+  @Input('event') event;
 
-  constructor() { }
+  constructor() {}
 
   ngOnInit() {}
-
 }

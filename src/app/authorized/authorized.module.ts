@@ -8,6 +8,7 @@ import { AuthorizedPageRoutingModule } from './authorized-routing.module';
 
 import { AuthorizedPage } from './authorized.page';
 import { HeaderComponent } from '../components/header/header.component';
+import { MinuteToTimePipe } from '../pipes/minute-to-time.pipe';
 
 @NgModule({
   imports: [

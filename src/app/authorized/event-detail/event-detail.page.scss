@@ -3,7 +3,13 @@
   img {
     border-radius: 10px;
     max-height: 400px;
+  }
 
+  .event-images-slider {
+    --bullet-background-active: white;
+    ion-slide {
+      margin-bottom: 40px;
+    }
   }
 }
 

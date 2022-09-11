@@ -10,7 +10,8 @@
       button
       class=""
       (click)="selectItem(option)"
-      *ngFor="let option of options"
+      *ngFor="let option of options; let i = index"
+      [ngClass]="{ selected: selectedIndex == i }"
     >
       <ion-label class="">{{ option[itemTitle] }}</ion-label>
     </ion-item>

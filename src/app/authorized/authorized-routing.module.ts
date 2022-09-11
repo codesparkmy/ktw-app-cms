@@ -19,7 +19,7 @@ const routes: Routes = [
           import('./events/events.module').then((m) => m.EventsPageModule),
       },
       {
-        path: 'event-detail',
+        path: 'event-detail/:id',
         loadChildren: () =>
           import('./event-detail/event-detail.module').then(
             (m) => m.EventDetailPageModule
@@ -49,19 +49,25 @@ const routes: Routes = [
       },
       {
         path: 'chat-message',
-        loadChildren: () => import('./chat-message/chat-message.module').then( m => m.ChatMessagePageModule)
+        loadChildren: () =>
+          import('./chat-message/chat-message.module').then(
+            (m) => m.ChatMessagePageModule
+          ),
       },
       {
         path: 'leave',
-        loadChildren: () => import('./leave/leave.module').then( m => m.LeavePageModule)
+        loadChildren: () =>
+          import('./leave/leave.module').then((m) => m.LeavePageModule),
       },
       {
         path: 'apply-leave',
-        loadChildren: () => import('./apply-leave/apply-leave.module').then( m => m.ApplyLeavePageModule)
+        loadChildren: () =>
+          import('./apply-leave/apply-leave.module').then(
+            (m) => m.ApplyLeavePageModule
+          ),
       },
     ],
   },
-  
 ];
 
 @NgModule({

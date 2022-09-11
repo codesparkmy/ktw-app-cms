@@ -2,11 +2,11 @@
   <div class="event-big-card-inner">
     <div class="user">
       <img class="avatar" src="../../../../assets/images/Group 9.png" alt="" />
-      <p class="name">Johan Rex</p>
+      <p class="name">{{ event.createdBy.name }}</p>
     </div>
     <div class="event-image">
       <img
-        [routerLink]="['/members/event-detail']"
+        [routerLink]="['/members/event-detail/', event.id]"
         src="../../../../assets/images/test-event.jpg"
         class="image"
         alt=""
@@ -14,17 +14,20 @@
     </div>
     <div class="event-detail">
       <div class="event-header">
-        <p class="title">Conference 1</p>
-        <p class="subtitle">by Speaker A</p>
+        <p class="title">{{ event.title }}</p>
+        <p class="subtitle">by {{ event.hostedBy }}</p>
       </div>
       <div class="time-location">
         <div class="time">
-          <ion-icon slot="icon-only" name="time"></ion-icon>
-          <p>22:00</p>
+          <ion-icon slot="icon-only" name="time-outline"></ion-icon>
+          <p>
+            {{ event.eventTimeFrom | minuteToTime }} -
+            {{ event.eventTimeTo | minuteToTime }}
+          </p>
         </div>
         <div class="location">
-          <ion-icon slot="icon-only" name="location"></ion-icon>
-          <p>22:00</p>
+          <ion-icon slot="icon-only" name="location-outline"></ion-icon>
+          <p>{{ event.hostedAt }}</p>
         </div>
       </div>
     </div>

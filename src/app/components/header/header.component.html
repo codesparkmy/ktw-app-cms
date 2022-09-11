@@ -5,10 +5,10 @@
         <div class="ion-activatable back-button" (click)="backClicked()">
           <ion-ripple-effect type="bounded"></ion-ripple-effect>
           <ion-icon
-            [ngClass]="{ 'black': backBlack }"
+            [ngClass]="{ black: backBlack }"
             slot="icon-only"
             name="arrow-back-outline"
-            style="color:white;width: 25px; height: 25px"
+            style="color: white; width: 25px; height: 25px"
           ></ion-icon>
         </div>
       </ng-container>
@@ -34,7 +34,11 @@
       </ng-template>
     </ion-col>
     <ion-col size="6" class="ion-align-self-center">
-      <ion-avatar class="avatar">
+      <div #child style="text-align: end">
+        <ng-content></ng-content>
+      </div>
+
+      <ion-avatar class="avatar" *ngIf="!child.children.length">
         <img
           src="https://gravatar.com/avatar/dba6bae8c566f9d4041fb9cd9ada7741?d=identicon&f=y"
         />

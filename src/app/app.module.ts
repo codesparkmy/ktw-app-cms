@@ -14,6 +14,8 @@ import { LeaveApiService } from './services/apis/leave.api.service';
 import { StorageService } from './services/internal/storage.service';
 import { EventApiService } from './services/apis/event.api.service';
 import { OutletsApiService } from './services/apis/outlets.api.service';
+import { MinuteToTimePipe } from './pipes/minute-to-time.pipe';
+import { EventImageApiService } from './services/apis/event-image.api.service';
 
 @NgModule({
   declarations: [AppComponent],
@@ -59,6 +61,17 @@ import { OutletsApiService } from './services/apis/outlets.api.service';
       useFactory: (pubSubService, storageService) => {
         return new OutletsApiService(
           '/api/outlets',
+          pubSubService,
+          storageService
+        );
+      },
+      deps: [PubSubService, StorageService],
+    },
+    {
+      provide: EventImageApiService,
+      useFactory: (pubSubService, storageService) => {
+        return new EventImageApiService(
+          '/api/event-images',
           pubSubService,
           storageService
         );

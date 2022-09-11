@@ -16,14 +16,42 @@ import { PopupSelectItemsComponent } from '../popup-select-items/popup-select-it
 })
 export class PopupSelectComponent implements OnInit {
   @Input('title') title;
-  @Input('options') options;
+  @Input('options') options: any[];
   @Input('itemTitle') itemTitle;
   @Input('itemValue') itemValue;
   @Input('placeholder') placeholder;
-  @Output('itemSelected') itemSelectedEmitter: EventEmitter<any> =
+
+  private _selected: any;
+
+  get selected(): any {
+    if (this.itemValue) return this._selected[this.itemValue];
+    return this._selected;
+  }
+
+  @Input('selected')
+  set selected(value: any) {
+    console.log(value);
+    if (this.itemValue) {
+      var found = this.options.find((z) => z[this.itemValue] == value);
+      if (found) {
+        this._selected = found;
+        this.selectedChange.emit(this._selected[this.itemValue]);
+      } else return;
+    } else {
+      if (this._selected === value) {
+        return;
+      }
+      this._selected = value;
+      this.selectedChange.emit(this._selected);
+    }
+  }
+
+  @Output('selectedChange') selectedChange: EventEmitter<any> =
     new EventEmitter<any>();
 
-  selected = null;
+  @Output('onSelect') onSelectEmitter: EventEmitter<any> =
+    new EventEmitter<any>();
+
   constructor(private modalController: ModalController, private zone: NgZone) {}
 
   ngOnInit() {}
@@ -38,16 +66,15 @@ export class PopupSelectComponent implements OnInit {
         options: this.options,
         itemTitle: this.itemTitle,
         itemValue: this.itemValue,
+        selected: this._selected,
       },
     });
     modal.present();
 
     modal.onDidDismiss().then((res) => {
       if (res.role == 'selected') {
-        this.itemSelectedEmitter.emit(res.data);
-        this.zone.run(() => {
-          this.selected = this.itemTitle ? res.data[this.itemTitle] : res.data;
-        });
+        this.selected = res.data;
+        this.onSelectEmitter.emit(this.selected);
       }
     });
   }

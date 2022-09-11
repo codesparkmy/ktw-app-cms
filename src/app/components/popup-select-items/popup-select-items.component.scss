@@ -7,11 +7,11 @@ ion-header {
 
 .popup-select-list {
   ion-item {
-    --padding-top: 6px;
-    --padding-bottom: 6px;
+    --padding-top: 3px;
+    --padding-bottom: 3px;
 
     &.selected {
-      --background: #6971fe;
+      --background: rgba(168, 38, 199, 0.6);
       --color: white;
     }
   }

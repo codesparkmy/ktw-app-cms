@@ -11,8 +11,8 @@ export class BaseApiService {
   protected axiosInstance: AxiosInstance;
   constructor(
     @Inject(HELPER_TYPE) private subUrl: string,
-    private pubSubService: PubSubService,
-    private storageService: StorageService
+    public pubSubService: PubSubService,
+    public storageService: StorageService
   ) {
     this.subUrl = subUrl;
   }

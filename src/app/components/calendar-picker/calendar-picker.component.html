@@ -10,12 +10,19 @@
       <div class="col">S</div>
     </div>
     <div class="grid days-row">
-      <div class="col day" *ngFor="let calendarDate of calendarDates">
+      <div
+        class="col day"
+        *ngFor="let calendarDate of calendarDates; let i = index"
+        (click)="dateClicked(i)"
+      >
         <ng-container *ngIf="calendarDate.label">
-          <div class="label" [ngClass]="{ selected: calendarDate.isSelected }">
+          <div
+            class="label"
+            [ngClass]="{ selected: i == selectedCalendarIndex }"
+          >
             <div class="text">{{ calendarDate.label }}</div>
           </div>
-          <div class="dot"></div>
+          <div class="dot" *ngIf="calendarDate.events.length > 0"></div>
         </ng-container>
       </div>
     </div>

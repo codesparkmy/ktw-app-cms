@@ -29,7 +29,11 @@
           ></ion-icon>
           <ion-label class="link-label">Home</ion-label>
         </ion-item>
-        <ion-item lines="full" class="link-item">
+        <ion-item
+          lines="full"
+          class="link-item"
+          [routerLink]="[ '/members/calendar' ]"
+        >
           <ion-icon
             slot="start"
             src="../../assets/icon/calendar-Light.svg"
@@ -37,52 +41,17 @@
           ></ion-icon>
           <ion-label class="link-label">Calendar</ion-label>
         </ion-item>
-        <ion-item lines="full" class="link-item">
-          <ion-accordion-group class="subitem-accordion">
-            <ion-accordion value="first" style="width: 100%">
-              <ion-item
-                slot="header"
-                color="light"
-                class="sublink-item"
-                [routerLink]="[ '/members/events' ]"
-              >
-                <ion-icon
-                  slot="start"
-                  src="../../assets/icon/thumbtack-Light.svg"
-                  class="link-icon"
-                ></ion-icon>
-                <ion-label class="link-label">Event</ion-label>
-              </ion-item>
-              <div class="ion-padding-start" slot="content">
-                <ion-list class="links">
-                  <ion-item lines="none" class="link-item">
-                    <ion-icon
-                      slot="start"
-                      src="../../assets/icon/pen-Light.svg"
-                      class="link-icon"
-                    ></ion-icon>
-                    <ion-label class="link-label">Register</ion-label>
-                  </ion-item>
-                  <ion-item lines="none" class="link-item">
-                    <ion-icon
-                      slot="start"
-                      src="../../assets/icon/bell-Light.svg"
-                      class="link-icon"
-                    ></ion-icon>
-                    <ion-label class="link-label">Reminder</ion-label>
-                  </ion-item>
-                  <ion-item lines="none" class="link-item">
-                    <ion-icon
-                      slot="start"
-                      src="../../assets/icon/plus-square-Light.svg"
-                      class="link-icon"
-                    ></ion-icon>
-                    <ion-label class="link-label">Add Event</ion-label>
-                  </ion-item>
-                </ion-list>
-              </div>
-            </ion-accordion>
-          </ion-accordion-group>
+        <ion-item
+          lines="full"
+          class="link-item"
+          [routerLink]="[ '/members/events' ]"
+        >
+          <ion-icon
+            slot="start"
+            src="../../assets/icon/thumbtack-Light.svg"
+            class="link-icon"
+          ></ion-icon>
+          <ion-label class="link-label">Events</ion-label>
         </ion-item>
         <ion-item
           lines="full"

@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { NavController } from '@ionic/angular';
-import { format, parseISO, parseJSON } from 'date-fns';
+import { format, parseISO } from 'date-fns';
 
 @Component({
   selector: 'app-edit',
@@ -9,6 +9,7 @@ import { format, parseISO, parseJSON } from 'date-fns';
   styleUrls: ['./edit.page.scss'],
 })
 export class EditPage implements OnInit {
+  @ViewChild("reason") reason;
   request: object[];
   options: object[];
   startDateString = null;
@@ -46,5 +47,12 @@ export class EditPage implements OnInit {
 
   backClicked() {
     this.navCtrl.navigateBack('/members/leave');
+  }
+
+  applyChanges(){
+    this.request["reason"] = this.reason.value;
+    this.request["dateStart"] = this.startDateString;
+    this.request["dateEnd"] = this.endDateString;
+    console.log(this.request)
   }
 }

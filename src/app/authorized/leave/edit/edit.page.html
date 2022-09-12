@@ -65,6 +65,7 @@
   <div class="px-4 mt-3 mb-15">
     <p class="input-title">REASONS</p>
     <ion-textarea
+      #reason
       class="multiLineText"
       rows="10"
       [value]="request.reason"
@@ -76,7 +77,7 @@
       <ion-icon class="camera-icon" name="camera-outline"></ion-icon>
     </div>
   </div>
-  <div class="action-btn ion-activatable">
+  <div class="action-btn ion-activatable" (click)="applyChanges()">
     <ion-ripple-effect type="bounded"></ion-ripple-effect>
     <p>Apply Change</p>
   </div>

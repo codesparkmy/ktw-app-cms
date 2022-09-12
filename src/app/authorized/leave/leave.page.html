@@ -45,7 +45,7 @@
         *ngIf="request.status == 'rejected'; else approved"
       >
         <div class="box-date">
-          <p>05-16 Sep</p>
+          <p>{{request.startDate}} - {{request.endDate}}</p>
         </div>
         <div class="leave-details">
           <div class="leave-type">{{request.leaveType}}</div>
@@ -62,7 +62,7 @@
           *ngIf="request.status == 'approved'; else pending"
         >
           <div class="box-date">
-            <p>05-16 Sep</p>
+            <p>{{request.startDate}} - {{request.endDate}}</p>
           </div>
           <div class="leave-details">
             <div class="leave-type">{{request.leaveType}}</div>
@@ -75,9 +75,9 @@
         </div>
       </ng-template>
       <ng-template #pending>
-        <div class="leave leave-pending">
+        <div class="leave leave-pending" (click)="edit(request)">
           <div class="box-date">
-            <p>05-16 Sep</p>
+            <p>{{request.startDate}} - {{request.endDate}}</p>
           </div>
           <div class="leave-details">
             <div class="leave-type">{{request.leaveType}}</div>

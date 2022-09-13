@@ -1,0 +1,42 @@
+<div class="calendar-event-items">
+  <div class="calendar-event-item">
+    <div class="event-item-inner" *ngFor="let event of events">
+      <div class="left">
+        <div class="dots">
+          <img src="../../../assets/svgs/reminder.svg" alt="" />
+        </div>
+        <div class="lines"></div>
+      </div>
+      <div class="right">
+        <div class="event-details">
+          <div class="details">
+            <ng-container *ngIf="event.type == 'event'; else holidayTemplate">
+              <div class="calendar-date">Event</div>
+              <div class="time">
+                {{ event.eventTimeFrom | minuteToTime }} -
+                {{ event.eventTimeTo | minuteToTime }}
+              </div>
+              <div class="title">{{ event.title }}</div>
+            </ng-container>
+            <ng-template #holidayTemplate>
+              <div class="calendar-date">Holiday</div>
+              <div class="time">All Day</div>
+              <div class="title">{{ event.name }}</div>
+            </ng-template>
+          </div>
+          <div class="avatars" *ngIf="event.type == 'event'">
+            <div class="avatar">
+              <img src="../../../assets/images/avatar (1).png" alt="" />
+            </div>
+            <div class="avatar">
+              <img src="../../../assets/images/avatar (4).png" alt="" />
+            </div>
+            <div class="avatar">
+              <img src="../../../assets/images/avatar (3).png" alt="" />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

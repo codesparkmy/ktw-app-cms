@@ -1,5 +1,49 @@
 <div class="calendar-picker">
   <div class="calendar-picker-inner">
+    <ion-datetime-button
+      color="warning"
+      class="datetime-picker"
+      datetime="datetime"
+    >
+      <div slot="date-target">
+        <div
+          style="
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+          "
+        >
+          <p>{{ currentMonth | date: "MMMM y" }}</p>
+          <ion-icon name="chevron-down"></ion-icon>
+        </div>
+      </div>
+    </ion-datetime-button>
+    <ion-modal
+    #dateTimeModal
+      [keepContentsMounted]="true"
+      style="--width: 90%"
+      [isOpen]="isDateTimeModalOpen"
+      class="datetime-modal"
+    >
+      <ng-template>
+        <ion-datetime
+          class="month-picker"
+          color="warning"
+          [(ngModel)]="currentMonth"
+          presentation="month-year"
+          id="datetime"
+        ></ion-datetime>
+        <ion-button
+          style="margin: 10px 40px"
+          fill="none"
+          color="primary"
+          (click)="closeDateTimeModal()"
+        >
+          close
+        </ion-button>
+      </ng-template>
+    </ion-modal>
+
     <div class="grid days-header-row">
       <div class="col">S</div>
       <div class="col">M</div>
@@ -22,7 +66,10 @@
           >
             <div class="text">{{ calendarDate.label }}</div>
           </div>
-          <div class="dot" *ngIf="calendarDate.events.length > 0"></div>
+          <div
+            class="dot"
+            [ngClass]="{ has: calendarDate.events.length > 0 }"
+          ></div>
         </ng-container>
       </div>
     </div>

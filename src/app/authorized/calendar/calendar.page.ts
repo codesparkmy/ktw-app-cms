@@ -8,6 +8,7 @@ import {
 import { CalendarPickerComponent } from 'src/app/components/calendar-picker/calendar-picker.component';
 import { EventApiService } from 'src/app/services/apis/event.api.service';
 import { OutletsApiService } from 'src/app/services/apis/outlets.api.service';
+import { PublicHolidayApiService } from 'src/app/services/apis/public-holiday.api.service';
 import { StorageService } from 'src/app/services/internal/storage.service';
 
 @Component({

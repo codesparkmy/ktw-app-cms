@@ -1,5 +1,13 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  OnInit,
+  Output,
+  ViewChild,
+} from '@angular/core';
 import { EventApiService } from 'src/app/services/apis/event.api.service';
+import { PublicHolidayApiService } from 'src/app/services/apis/public-holiday.api.service';
 import { StorageService } from 'src/app/services/internal/storage.service';
 
 @Component({
@@ -11,10 +19,17 @@ export class CalendarPickerComponent implements OnInit {
   calendarDates = [];
   selectedCalendarIndex = null;
   _events = [];
-
+  currentMonth = new Date().toISOString();
+  isDateTimeModalOpen = false;
+  @ViewChild('dateTimeModal') dateTimeModal;
   @Input('selectedDateEvents') selectedDateEvents = [];
   @Output('selectedDateEventsChange') selectedDateEventsChange =
     new EventEmitter<any[]>();
+
+  @Input('publicHolidays') publicHolidays = [];
+  @Output('publicHolidaysChange') publicHolidaysChange = new EventEmitter<
+    any[]
+  >();
 
   get events() {
     return this._events;
@@ -26,24 +41,34 @@ export class CalendarPickerComponent implements OnInit {
     this._events = newVal;
 
     for (const date of this.calendarDates) {
-      date.events = newVal.filter(
-        (z) =>
-          new Date(z.eventDateFrom) <= date.date &&
-          new Date(z.eventDateTo) >= date.date
-      );
+      date.events = newVal.filter((z) => {
+        if (z.type == 'event') {
+          return (
+            new Date(z.eventDateFrom) <= date.date &&
+            new Date(z.eventDateTo) >= date.date
+          );
+        }
+        if (z.type == 'holiday') {
+          return z.startDateObj <= date.date && z.endDateObj >= date.date;
+        }
+        return false;
+      });
     }
+
+    console.log(this.calendarDates);
   }
 
   constructor(
     private eventApiService: EventApiService,
-    private storageService: StorageService
+    private storageService: StorageService,
+    private publicHolidaysService: PublicHolidayApiService
   ) {}
 
   async ngOnInit() {
     this.fillMonth();
   }
 
-  fillMonth() {
+  async fillMonth() {
     this.calendarDates = [];
     var startDay = new Date().getDate();
     var today = new Date();
@@ -67,24 +92,45 @@ export class CalendarPickerComponent implements OnInit {
         });
       }
     }
-    this.getEventsByOutletId();
-    console.log(this.calendarDates);
+    var events = await this.getEventsByOutletId();
+    var holidays = await this.getPublicHolidays();
+    console.log(events.data);
+    this.events = [
+      ...events.data.map((z) => {
+        z.type = 'event';
+        return z;
+      }),
+      ...holidays.data.map((z) => {
+        z.type = 'holiday';
+        var fromDateObj = new Date(z.startDate);
+        fromDateObj.setHours(0);
+        var toDateObj = new Date(z.endDate);
+        toDateObj.setHours(0);
+        z.startDateObj = fromDateObj;
+        z.endDateObj = toDateObj;
+        return z;
+      }),
+    ];
   }
 
   async getEventsByOutletId() {
-    this.eventApiService
-      .getEventByMonth(
-        (await this.storageService.decodeToken()).outlet,
-        9,
-        2022
-      )
-      .then((res) => {
-        this.events = res.data;
-      });
+    return this.eventApiService.getEventByMonth(
+      (await this.storageService.decodeToken()).outlet,
+      9,
+      2022
+    );
+  }
+
+  getPublicHolidays() {
+    return this.publicHolidaysService.getByMonthAndYear(9, 2022);
   }
 
   dateClicked(i) {
     this.selectedCalendarIndex = i;
     this.selectedDateEventsChange.emit(this.calendarDates[i].events);
+  }
+
+  closeDateTimeModal() {
+    this.dateTimeModal.dismiss();
   }
 }

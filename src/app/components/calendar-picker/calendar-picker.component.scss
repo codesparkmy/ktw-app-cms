@@ -1,5 +1,20 @@
 .calendar-picker {
   .calendar-picker-inner {
+    .datetime-picker {
+      margin-bottom: 20px;
+      margin-top: 5px;
+      width: 100%;
+
+      &::part(native) {
+        width: 100%;
+        text-align: left;
+        background-color: transparent;
+        color: white;
+        font-size: 24px;
+        font-family: "Roboto";
+        font-weight: 500;
+      }
+    }
     .grid {
       display: grid;
       grid-template-columns: repeat(7, 1fr);
@@ -48,7 +63,9 @@
           width: 8px;
           height: 8px;
           border-radius: 100%;
-          background-color: #8d7ea8;
+          &.has {
+            background-color: #8d7ea8;
+          }
         }
       }
     }
@@ -58,4 +75,12 @@
       padding-bottom: 16px;
     }
   }
+}
+
+.month-picker {
+  color: black;
+}
+
+.datetime-modal {
+  --border-radius: 10px;
 }

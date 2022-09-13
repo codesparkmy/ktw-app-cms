@@ -17,6 +17,7 @@ import { OutletsApiService } from './services/apis/outlets.api.service';
 import { MinuteToTimePipe } from './pipes/minute-to-time.pipe';
 import { EventImageApiService } from './services/apis/event-image.api.service';
 import { ProfileApiService } from './services/apis/profile.api.service';
+import { PublicHolidayApiService } from './services/apis/public-holiday.api.service';
 
 @NgModule({
   declarations: [AppComponent],
@@ -84,6 +85,17 @@ import { ProfileApiService } from './services/apis/profile.api.service';
       useFactory: (pubSubService, storageService) => {
         return new ProfileApiService(
           '/api/users',
+          pubSubService,
+          storageService
+        );
+      },
+      deps: [PubSubService, StorageService],
+    },
+    {
+      provide: PublicHolidayApiService,
+      useFactory: (pubSubService, storageService) => {
+        return new PublicHolidayApiService(
+          '/api/public-holidays',
           pubSubService,
           storageService
         );

@@ -1,5 +1,5 @@
 <ion-content>
-  <div class="bg-gradient-2">
+  <div class="bg-gradient-2 calendar-header">
     <top-bar-header white></top-bar-header>
     <p class="pl-16 page-title white">Calendar</p>
     <calendar-picker
@@ -7,5 +7,7 @@
       [(selectedDateEvents)]="events"
     ></calendar-picker>
   </div>
-  <div class="events-listing"></div>
+  <div class="events-listings">
+    <calendar-event-items [events]="events"></calendar-event-items>
+  </div>
 </ion-content>

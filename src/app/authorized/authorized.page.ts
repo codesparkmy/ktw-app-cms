@@ -1,7 +1,9 @@
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
-import { IonMenu, MenuController } from '@ionic/angular';
+import { IonMenu, MenuController, NavController } from '@ionic/angular';
 import { PubSubService } from '../services/internal/pub-sub.service';
+import { StorageService } from '../services/internal/storage.service';
+import { StorageKeys } from '../services/storage-keys';
 
 @Component({
   selector: 'app-authorized',
@@ -12,7 +14,12 @@ export class AuthorizedPage implements OnInit, AfterViewInit {
   @ViewChild('menu') menu: IonMenu;
 
   isNavigated = false;
-  constructor(private pubSubService: PubSubService, private router: Router) {}
+  constructor(
+    private pubSubService: PubSubService,
+    private router: Router,
+    private navCtrl: NavController,
+    private storageService: StorageService
+  ) {}
 
   ngOnInit() {
     this.router.events.subscribe(async (z) => {
@@ -23,8 +30,7 @@ export class AuthorizedPage implements OnInit, AfterViewInit {
     });
   }
 
-  ngAfterViewInit(): void {
-  }
+  ngAfterViewInit(): void {}
 
   menuIsOpening() {
     this.pubSubService.menuStateSubject.next({
@@ -40,5 +46,13 @@ export class AuthorizedPage implements OnInit, AfterViewInit {
     });
 
     this.isNavigated = false;
+  }
+
+  async logOut() {
+    await this.storageService.set(StorageKeys.TOKEN, null);
+    this.pubSubService.token.next(null);
+    this.navCtrl.navigateRoot('/login', {
+      replaceUrl: true,
+    });
   }
 }

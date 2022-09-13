@@ -60,6 +60,11 @@ const routes: Routes = [
           import('./leave/leave.module').then((m) => m.LeavePageModule),
       },
       {
+        path: 'leave/edit/:id',
+        loadChildren: () =>
+          import('./leave/edit/edit.module').then((m) => m.EditPageModule),
+      },
+      {
         path: 'apply-leave',
         loadChildren: () =>
           import('./apply-leave/apply-leave.module').then(

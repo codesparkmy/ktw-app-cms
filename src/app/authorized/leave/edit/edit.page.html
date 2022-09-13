@@ -1,9 +1,14 @@
 <ion-content>
   <top-bar-header back backBlack (backClicked)="backClicked()"></top-bar-header>
-  <p class="pl-16 page-title mt-16">Apply Leave</p>
+  <p class="pl-16 page-title mt-16">Edit Leave</p>
   <div class="px-4 mt-3 mb-15">
     <p class="input-title">TYPE OF LEAVE</p>
-    <popup-select title="Type of Leave" [options]="options"></popup-select>
+    <popup-select
+      title="Type of Leave"
+      itemTitle="name"
+      itemValue="request.leaveType"
+      [options]="options"
+    ></popup-select>
   </div>
   <ion-grid class="px-4 mb-15">
     <ion-row>
@@ -59,7 +64,12 @@
   </ion-grid>
   <div class="px-4 mt-3 mb-15">
     <p class="input-title">REASONS</p>
-    <ion-textarea class="multiLineText" rows="10"></ion-textarea>
+    <ion-textarea
+      #reason
+      class="multiLineText"
+      rows="10"
+      [value]="request.reason"
+    ></ion-textarea>
   </div>
   <div class="px-4 mt-3 mb-15">
     <p class="input-title">ATTACHMENT</p>
@@ -67,8 +77,8 @@
       <ion-icon class="camera-icon" name="camera-outline"></ion-icon>
     </div>
   </div>
-  <div class="action-btn ion-activatable">
+  <div class="action-btn ion-activatable" (click)="applyChanges()">
     <ion-ripple-effect type="bounded"></ion-ripple-effect>
-    <p>Apply</p>
+    <p>Apply Change</p>
   </div>
 </ion-content>

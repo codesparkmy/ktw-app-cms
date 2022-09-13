@@ -11,6 +11,8 @@
           [showSubtitle]="false"
           [titleColor]="'#000000'"
           [backgroundColor]="'#ffffff'"
+          [innerStrokeColor]="'#FFB20A'"
+          [outerStrokeColor]="'#FFB20A'"
           [radius]="40"
           [animation]="true"
           [showInnerStroke]="false"
@@ -26,7 +28,7 @@
   <div class="wrapper-leave-list">
     <div class="wrapper-leave-header pl-4 pr-4">
       <div class="title-modal mt-4">Leave Requests</div>
-      <div
+      <!-- <div
         class="apply-leave-btn ion-activatable"
         [routerLink]="[ '/members/apply-leave' ]"
       >
@@ -35,21 +37,63 @@
           <ion-icon name="add-circle-outline"></ion-icon>
           Apply for Leave
         </p>
-      </div>
+      </div> -->
     </div>
-    <div class="wrapper-leave-status">
-      <div class="leave leave-reject">
+    <div class="wrapper-leave-status" *ngFor="let request of requestLeave">
+      <div
+        class="leave leave-reject"
+        *ngIf="request.status == 'rejected'; else approved"
+      >
         <div class="box-date">
-          <p>05-16 Sep</p>
+          <p>{{request.startDate}} - {{request.endDate}}</p>
         </div>
         <div class="leave-details">
-          <div class="leave-type">Annual</div>
-          <div class="reason-leave">I would like to take out some days.</div>
+          <div class="leave-type">{{request.leaveType}}</div>
+          <div class="reason-leave">{{request.reason}}</div>
           <div class="leave-status">
-            <p>Rejected</p>
+            <ion-icon class="status-icon" name="close-circle-outline"></ion-icon>
+            <p class="status-text">{{request.status}}</p>
           </div>
         </div>
       </div>
+      <ng-template #approved>
+        <div
+          class="leave leave-approve"
+          *ngIf="request.status == 'approved'; else pending"
+        >
+          <div class="box-date">
+            <p>{{request.startDate}} - {{request.endDate}}</p>
+          </div>
+          <div class="leave-details">
+            <div class="leave-type">{{request.leaveType}}</div>
+            <div class="reason-leave">{{request.reason}}</div>
+            <div class="leave-status">
+              <ion-icon class="status-icon" name="checkmark-circle-outline"></ion-icon>
+              <p class="status-text">{{request.status}}</p>
+            </div>
+          </div>
+        </div>
+      </ng-template>
+      <ng-template #pending>
+        <div class="leave leave-pending" (click)="edit(request)">
+          <div class="box-date">
+            <p>{{request.startDate}} - {{request.endDate}}</p>
+          </div>
+          <div class="leave-details">
+            <div class="leave-type">{{request.leaveType}}</div>
+            <div class="reason-leave">{{request.reason}}</div>
+            <div class="leave-status">
+              <ion-icon class="status-icon" name="time-outline"></ion-icon>
+              <p class="status-text">{{request.status}}</p>
+            </div>
+          </div>
+        </div>
+      </ng-template>
     </div>
   </div>
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button color="custom" translucent [routerLink]="[ '/members/apply-leave' ]">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
 </ion-content>

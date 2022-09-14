@@ -9,11 +9,17 @@ import { format, parseISO } from 'date-fns';
   styleUrls: ['./edit.page.scss'],
 })
 export class EditPage implements OnInit {
-  @ViewChild("reason") reason;
+  @ViewChild('reason') reason;
   request: object[];
-  options: object[];
   startDateString = null;
   endDateString = null;
+  selectedTypeLeave = '';
+  options = [
+    { title: 'Annual', Value: 'Annual' },
+    { title: 'Medical', Value: 'Medical' },
+    { title: 'Emergency', Value: 'Emergency' },
+  ];
+
   constructor(private route: ActivatedRoute, private navCtrl: NavController) {}
 
   ngOnInit() {
@@ -21,18 +27,17 @@ export class EditPage implements OnInit {
       this.request = JSON.parse(params['data']);
     });
 
+    this.selectedTypeLeave = this.request['leaveType'];
+
     this.startDateString = format(
       new Date(this.request['dateStart']),
       'd MMM yyyy'
     );
 
-    this.endDateString = format(new Date(this.request['dateEnd']), 'd MMM yyyy');
-
-    this.options = [
-      { title: 'Annual', Value: 'Annual' },
-      { title: 'Medical', Value: 'Medical' },
-      { title: 'Emergency', Value: 'Emergency' },
-    ];
+    this.endDateString = format(
+      new Date(this.request['dateEnd']),
+      'd MMM yyyy'
+    );
   }
 
   endDateChanged(value) {
@@ -47,9 +52,16 @@ export class EditPage implements OnInit {
     this.navCtrl.navigateBack('/members/leave');
   }
 
-  applyChanges(){
-    this.request["reason"] = this.reason.value;
-    this.request["dateStart"] = this.startDateString;
-    this.request["dateEnd"] = this.endDateString;
+  applyChanges() {
+    this.request['reason'] = this.reason.value;
+    this.request['dateStart'] = this.startDateString;
+    this.request['dateEnd'] = this.endDateString;
+    this.request['leaveType'] = this.selectedTypeLeave;
+    console.log(this.request);
+    this.navCtrl.back();
+  }
+
+  onEditLeaveTypeSelect($event) {
+    console.log($event);
   }
 }

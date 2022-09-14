@@ -88,6 +88,8 @@ export class LeavePage implements OnInit {
       type: 'Public',
     },
   ];
+
+  leaves = [];
   constructor(
     private platform: Platform,
     private pubSub: PubSubService,
@@ -100,6 +102,9 @@ export class LeavePage implements OnInit {
       this.leaveTypes = res.data;
     });
 
+    this.leaveApiService.getLeaves().then((res) => {
+      this.leaves = res.data;
+    });
     this.formatDate();
   }
 

@@ -36,7 +36,6 @@ export class ApplyLeavePage implements OnInit {
     }
     return false;
   }
-
   get errorMessage() {
     if (
       !this.form.leaveType ||

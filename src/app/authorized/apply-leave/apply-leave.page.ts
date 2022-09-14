@@ -14,6 +14,8 @@ export class ApplyLeavePage implements OnInit {
   dateValue = format(new Date(), 'd MMM yyyy');
   endDateString = '';
   startDateString = '';
+  selectedLeave = '';
+
   constructor(private navCtrl: NavController) {
     this.endDate();
     this.startDate();
@@ -21,10 +23,11 @@ export class ApplyLeavePage implements OnInit {
 
   ngOnInit() {
     this.options = [
-      {title:"Annual",Value:"Annual"},
-      {title:"Medical",Value:"Medical"},
-      {title:"Emergency",Value:"Emergency"}
+      {id:1,title:"Annual",Value:"Annual"},
+      {id:2,title:"Medical",Value:"Medical"},
+      {id:3,title:"Emergency",Value:"Emergency"}
     ]
+    
   }
 
   endDate() {
@@ -57,5 +60,9 @@ export class ApplyLeavePage implements OnInit {
     });
 
     this.picture = image.dataUrl;
+  }
+
+  onTypeLeave($event){
+    console.log('this :: ',$event);
   }
 }

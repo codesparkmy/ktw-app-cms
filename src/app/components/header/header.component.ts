@@ -26,6 +26,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
   backBlack = false;
   avatar = null;
   baseApiUrl = environment.api_url;
+  isLoaded = false;
   constructor(
     private menuController: MenuController,
     private pubSubService: PubSubService
@@ -35,6 +36,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
     });
     this.pubSubService.avatar.subscribe((z) => {
       this.avatar = z;
+      this.isLoaded = true;
     });
   }
 

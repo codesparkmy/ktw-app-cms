@@ -6,9 +6,19 @@
   <div class="center-page">
     <div class="container">
       <div class="grid-col-span-2 justify-center">
-        <p class="time">{{ time | date: 'hh:mm a' }}</p>
+        <!-- <p class="time">{{ time | date: 'hh:mm a' }}</p> -->
+
+        <div id="clockContainer">
+          <div class="backdrop"></div>
+          <div id="hour"></div>
+          <div id="minute"></div>
+          <div id="second"></div>
+        </div>
       </div>
 
+      <div class="check-in-text grid-col-span-2" *ngIf="current">
+        <p>Checked in : {{current?.checkInDate | date : 'medium'}}</p>
+      </div>
       <div
         class="btn-outer-start justify-center"
         [ngClass]="{disable: disableButtonStart}"

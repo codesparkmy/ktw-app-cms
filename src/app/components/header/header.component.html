@@ -43,7 +43,14 @@
         *ngIf="!child.children.length"
         [routerLink]="['/members/profile']"
       >
-        <img [src]="baseApiUrl + '/uploads/avatar/' + avatar" />
+        <img
+          *ngIf="isLoaded"
+          [src]="
+            avatar
+              ? baseApiUrl + '/uploads/avatar/' + avatar
+              : baseApiUrl + '/uploads/avatar/default.jpg'
+          "
+        />
       </ion-avatar>
     </ion-col>
   </ion-row>

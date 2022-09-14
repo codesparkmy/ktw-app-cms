@@ -129,19 +129,21 @@ export class ApplyLeavePage implements OnInit {
       form_data.append(key, this.form[key]);
     }
 
-    const rawData = atob(
-      this.attachment.replace('data:', '').replace(/^.+,/, '')
-    );
+    if (this.attachment) {
+      const rawData = atob(
+        this.attachment.replace('data:', '').replace(/^.+,/, '')
+      );
 
-    const bytes = new Array(rawData.length);
-    for (let x = 0; x < rawData.length; x++) {
-      bytes[x] = rawData.charCodeAt(x);
+      const bytes = new Array(rawData.length);
+      for (let x = 0; x < rawData.length; x++) {
+        bytes[x] = rawData.charCodeAt(x);
+      }
+      const arr = new Uint8Array(bytes);
+
+      const blob = new Blob([arr], { type: 'image/' + this.attachmentFormat });
+
+      form_data.append('leaves', blob, 'image.' + this.attachmentFormat);
     }
-    const arr = new Uint8Array(bytes);
-
-    const blob = new Blob([arr], { type: 'image/' + this.attachmentFormat });
-
-    form_data.append('leaves', blob, 'image.' + this.attachmentFormat);
     this.leaveApiService.applyLeave(form_data).then(async (res) => {
       var toast = await this.toastController.create({
         message: 'Leave application has been submitted',

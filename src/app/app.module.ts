@@ -19,6 +19,7 @@ import { EventImageApiService } from './services/apis/event-image.api.service';
 import { ProfileApiService } from './services/apis/profile.api.service';
 import { PublicHolidayApiService } from './services/apis/public-holiday.api.service';
 import { EventRegistrationApiService } from './services/apis/event-registration.api.service';
+import { AttendancesApiService } from './services/apis/attendances.api.service';
 
 @NgModule({
   declarations: [AppComponent],
@@ -108,6 +109,17 @@ import { EventRegistrationApiService } from './services/apis/event-registration.
       useFactory: (pubSubService, storageService) => {
         return new EventRegistrationApiService(
           '/api/event-registrations',
+          pubSubService,
+          storageService
+        );
+      },
+      deps: [PubSubService, StorageService],
+    },
+    {
+      provide: AttendancesApiService,
+      useFactory: (pubSubService, storageService) => {
+        return new AttendancesApiService(
+          '/api/attendances',
           pubSubService,
           storageService
         );

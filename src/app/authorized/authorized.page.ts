@@ -14,6 +14,9 @@ export class AuthorizedPage implements OnInit, AfterViewInit {
   @ViewChild('menu') menu: IonMenu;
 
   isNavigated = false;
+
+  type = 'user';
+
   constructor(
     private pubSubService: PubSubService,
     private router: Router,
@@ -21,7 +24,9 @@ export class AuthorizedPage implements OnInit, AfterViewInit {
     private storageService: StorageService
   ) {}
 
-  ngOnInit() {
+  async ngOnInit() {
+    this.type = (await this.storageService.decodeToken()).type;
+    console.log(this.type);
     this.router.events.subscribe(async (z) => {
       if (z instanceof NavigationEnd) {
         this.isNavigated = true;

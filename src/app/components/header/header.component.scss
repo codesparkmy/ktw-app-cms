@@ -27,9 +27,14 @@
   }
 
   .avatar {
-    height: 50px;
+    height: 40px;
+    width: 40px; 
     margin-right: 14px;
     margin-left: auto;
+    img {
+      height: 40px;
+      width: 40px; 
+    }
   }
 
   .black {

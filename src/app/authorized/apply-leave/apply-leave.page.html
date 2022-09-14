@@ -3,14 +3,26 @@
   <p class="pl-16 page-title mt-16">Apply Leave</p>
   <div class="px-4 mt-3 mb-15">
     <p class="input-title">TYPE OF LEAVE</p>
-    <popup-select title="Type of Leave" [options]="options"></popup-select>
+    <popup-select
+      class="type-leave"
+      title="Type of Leave"
+      [(selected)]="form.leaveType"
+      itemValue="type"
+      itemTitle="type"
+      [options]="leaveTypes"
+    ></popup-select>
+    <p *ngIf="typeSelected" class="mt-2">
+      {{typeSelected?.days}} days remaining
+    </p>
   </div>
   <ion-grid class="px-4 mb-15">
     <ion-row>
       <ion-col size="6" class="no-pl">
         <p class="input-title">STARTS AT</p>
         <div class="calendar-container" id="open-start-calendar">
-          <ion-text class="text-date"> {{startDateString}}</ion-text>
+          <ion-text class="text-date">
+            {{form.startDateString | date}}</ion-text
+          >
           <ion-icon
             class="calendar-icon"
             datetime="datetime"
@@ -34,7 +46,7 @@
       <ion-col size="6" class="no-pr">
         <p class="input-title">ENDS AT</p>
         <div class="calendar-container" id="open-end-calendar">
-          <ion-text class="text-date"> {{endDateString}} </ion-text>
+          <ion-text class="text-date"> {{form.endDateString | date}} </ion-text>
           <ion-icon
             class="calendar-icon"
             datetime="datetime"
@@ -55,20 +67,44 @@
           </ng-template>
         </ion-modal>
       </ion-col>
+      <ion-col size="12" *ngIf="usedDays">
+        {{usedDays}} day(s) will be deducted
+      </ion-col>
     </ion-row>
   </ion-grid>
   <div class="px-4 mt-3 mb-15">
     <p class="input-title">REASONS</p>
-    <ion-textarea class="multiLineText" rows="10"></ion-textarea>
+    <ion-textarea
+      [(ngModel)]="form.reason"
+      class="multiLineText"
+      rows="10"
+    ></ion-textarea>
   </div>
   <div class="px-4 mt-3 mb-15">
-    <p class="input-title">ATTACHMENT</p>
+    <p class="input-title">ATTACHMENT (Optional)</p>
     <div class="camera-container" (click)="openGallery()">
-      <ion-icon class="camera-icon" name="camera-outline"></ion-icon>
+      <img [src]="attachment" *ngIf="attachment" />
+      <ion-icon
+        class="camera-icon"
+        name="camera-outline"
+        *ngIf="!attachment"
+      ></ion-icon>
     </div>
   </div>
-  <div class="action-btn ion-activatable">
+  <div class="error-message" *ngIf="errorMessage">
+    <p>{{errorMessage}}</p>
+  </div>
+  <div
+    class="action-btn ion-activatable"
+    (click)="applyLeave()"
+    [ngClass]="{'disabled': !canApply}"
+  >
     <ion-ripple-effect type="bounded"></ion-ripple-effect>
-    <p>Apply</p>
+    <ng-container *ngIf="canApply; else unableApplyTemp">
+      <p>Apply</p>
+    </ng-container>
+    <ng-template #unableApplyTemp>
+      <p>Unable to Apply</p>
+    </ng-template>
   </div>
 </ion-content>

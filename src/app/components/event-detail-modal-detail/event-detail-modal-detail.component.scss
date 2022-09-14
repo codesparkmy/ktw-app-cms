@@ -11,9 +11,7 @@
       margin: 0;
     }
 
-
     .text-title {
-      
       font-size: 14px;
     }
 
@@ -26,8 +24,25 @@
 }
 
 .event-content {
+  white-space: break-spaces;
   margin-top: 20px;
   letter-spacing: 0.5px;
   line-height: 26px;
   font-family: "Roboto";
+}
+
+.register-btn {
+  padding: 14px;
+  border-radius: 16px;
+  color: white;
+  text-align: center;
+  font-weight: 500;
+  font-size: 16px;
+  margin-bottom: 14px;
+
+  &.disabled {
+    background: rgba(182, 182, 182, 0.521) !important;
+    color: rgb(141, 141, 141);
+    font-weight: 400;
+  }
 }

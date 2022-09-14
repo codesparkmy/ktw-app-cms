@@ -9,6 +9,7 @@ import {
 import { ActivatedRoute } from '@angular/router';
 import { NavController, Platform } from '@ionic/angular';
 import { EventImageApiService } from 'src/app/services/apis/event-image.api.service';
+import { EventRegistrationApiService } from 'src/app/services/apis/event-registration.api.service';
 import { EventApiService } from 'src/app/services/apis/event.api.service';
 import { environment } from 'src/environments/environment';
 
@@ -19,7 +20,6 @@ import { environment } from 'src/environments/environment';
 })
 export class EventDetailPage implements OnInit, OnDestroy, AfterViewInit {
   @ViewChild('eventImage') eventImage;
-  @ViewChild('modal') modal;
   @ViewChild('slides') slides;
   breakpoint = null;
   initBreakpoint = null;
@@ -29,13 +29,14 @@ export class EventDetailPage implements OnInit, OnDestroy, AfterViewInit {
   baseApiUrl = environment.api_url;
   images = [];
   highlightImage = null;
-
+  eventRegistration = null;
   constructor(
     private platform: Platform,
     private navCtrl: NavController,
     private eventApiService: EventApiService,
     private activatedRoute: ActivatedRoute,
-    private eventImageApiService: EventImageApiService
+    private eventImageApiService: EventImageApiService,
+    private eventRegistrationApiService: EventRegistrationApiService
   ) {}
 
   ngOnInit() {
@@ -56,34 +57,25 @@ export class EventDetailPage implements OnInit, OnDestroy, AfterViewInit {
               );
             });
         });
+
+      this.eventRegistrationApiService
+        .checkAttendance(this.activatedRoute.snapshot.params.id)
+        .then((res) => {
+          this.eventRegistration = res.data;
+        });
     }
   }
 
   ngAfterViewInit(): void {}
 
-  imageLoaded() {
-    this.platform.ready().then((res) => {
-      setTimeout(() => {
-        var percentage =
-          1 -
-          (this.slides.el.offsetTop +
-            this.eventImage.nativeElement.height +
-            40) /
-            window.innerHeight;
-
-        var bp = Math.round(percentage * 100) / 100;
-        this.breakpoint = [bp, 0.95];
-        this.initBreakpoint = bp;
-      }, 200);
-    });
-  }
+  imageLoaded() {}
 
   backClicked() {
-    this.modal.dismiss();
     this.navCtrl.back();
   }
 
-  ngOnDestroy(): void {
-    this.modal.dismiss();
+  registerClicked() {
+    this.eventRegistrationApiService.registerEvent(this.event.id);
   }
+  ngOnDestroy(): void {}
 }

@@ -17,7 +17,6 @@ export class PopupSelectItemsComponent implements OnInit {
   constructor(private modalController: ModalController, private zone: NgZone) {}
 
   ngOnInit() {
-    console.log(this.options);
     if (this.selected)
       this.selectedIndex = this.options.findIndex((z) => z == this.selected);
   }

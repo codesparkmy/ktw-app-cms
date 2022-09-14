@@ -6,11 +6,8 @@ import { Component, Input, OnInit } from '@angular/core';
   styleUrls: ['./list.component.scss'],
 })
 export class ListComponent implements OnInit {
-@Input('messageList') messageList;
-  constructor() { }
+  @Input('messageList') messageList;
+  constructor() {}
 
-  ngOnInit() {
-    console.log(this.messageList)
-  }
-
+  ngOnInit() {}
 }

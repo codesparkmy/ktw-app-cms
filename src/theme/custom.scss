@@ -16,7 +16,7 @@ ion-content.bg-gradient-2 {
 
 .action-btn {
   background: linear-gradient(150deg, #7001dc, #a826c7);
-  padding: 10px;
+  padding: 16px;
   color: white;
   margin: 0px 14px 14px 10px;
   border-radius: 20px;
@@ -25,6 +25,12 @@ ion-content.bg-gradient-2 {
     rgb(179 143 255 / 15%) 0 1px 2px, rgb(189 96 255 / 15%) 0 2px 4px,
     rgb(44 187 99 / 15%) 0 4px 8px, rgb(172 136 255 / 15%) 0 8px 16px,
     rgb(30 0 100 / 15%) 0 16px 32px;
+
+  &.disabled {
+    background: rgba(182, 182, 182, 0.521) !important;
+    color: rgb(141, 141, 141);
+    font-weight: 400;
+  }
 }
 
 .custom-input {
@@ -46,6 +52,6 @@ ion-content.bg-gradient-2 {
   font-size: 14px;
 }
 
-.native-textarea{
+.native-textarea {
   padding: 0 !important;
 }

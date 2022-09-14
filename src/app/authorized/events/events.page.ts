@@ -33,10 +33,9 @@ export class EventsPage implements OnInit {
   getEventsByOutletId(outletId) {
     this.EventApiService.getEventsByOutlet(outletId).then((res) => {
       this.events = res.data;
-      console.log(this.events);
     });
   }
   onOutletSelect($event) {
-    console.log($event);
+    this.getEventsByOutletId($event);
   }
 }

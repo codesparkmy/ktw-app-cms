@@ -9,6 +9,7 @@ import {
 import { MenuController } from '@ionic/angular';
 import { Subscription } from 'rxjs';
 import { PubSubService } from 'src/app/services/internal/pub-sub.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'top-bar-header',
@@ -23,13 +24,17 @@ export class HeaderComponent implements OnInit, OnDestroy {
   menuIsOpened = false;
   menuStateSub?: Subscription;
   backBlack = false;
-
+  avatar = null;
+  baseApiUrl = environment.api_url;
   constructor(
     private menuController: MenuController,
     private pubSubService: PubSubService
   ) {
     this.pubSubService.menuStateSubject.subscribe((z) => {
       if (z) this.menuIsOpened = !z.isClosing;
+    });
+    this.pubSubService.avatar.subscribe((z) => {
+      this.avatar = z;
     });
   }
 

@@ -36,6 +36,11 @@ export class LoginPage implements OnInit {
       );
       await this.storageService.set(StorageKeys.TOKEN, loggedIn.data.token);
       this.pubSubService.token.next(loggedIn.data.token);
+      await this.storageService.set(
+        StorageKeys.AVATAR,
+        loggedIn.data.avatar
+      );
+      this.pubSubService.avatar.next(loggedIn.data.avatar);
       this.navController.navigateRoot('/members/home');
     } catch (ex) {
       var errToast = await this.toastController.create({

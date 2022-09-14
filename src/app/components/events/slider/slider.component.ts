@@ -35,7 +35,6 @@ export class SliderComponent implements OnInit {
   getEventsByOutletId(outletId) {
     this.EventApiService.getEventsByOutlet(outletId).then((res) => {
       this.events = res.data;
-      console.log(this.events);
     });
   }
 }

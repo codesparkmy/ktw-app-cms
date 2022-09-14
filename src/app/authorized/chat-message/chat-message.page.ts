@@ -12,7 +12,6 @@ export class ChatMessagePage implements OnInit {
   constructor(private route: ActivatedRoute, private navCtrl: NavController) {}
 
   ngOnInit() {
-    console.log(this.route.snapshot);
     this.user = this.route.snapshot.params.id;
   }
 

@@ -1,33 +1,36 @@
-<ion-content class="bg-gradient-2">
-  <top-bar-header back white (backClicked)="backClicked()"></top-bar-header>
-
-  <p class="pl-16 page-subtitle white">{{event?.title}}</p>
-  <div class="event-image">
-    <ion-slides mode="ios" pager="ios" #slides class="event-images-slider">
-      <ion-slide>
-        <img
-          *ngIf="highlightImage"
-          #eventImage
-          (load)="imageLoaded()"
-          [src]="baseApiUrl + '/uploads/eventImages/' + highlightImage.fileId"
-          alt=""
-        />
-      </ion-slide>
-      <ion-slide *ngFor="let image of images">
-        <img
-          [src]="baseApiUrl + '/uploads/eventImages/' + image.fileId"
-          alt=""
-        />
-      </ion-slide>
-    </ion-slides>
-    <!-- <img
-      #eventImage
-      src="../../../assets/images/test-event.jpg"
-      alt=""
-      (load)="imageLoaded()"
-    /> -->
+<ion-content class="">
+  <div class="bg-gradient-2 event-header">
+    <top-bar-header back white (backClicked)="backClicked()"></top-bar-header>
+    <p class="pl-16 page-subtitle white">{{event?.title}}</p>
+    <div class="event-image">
+      <ion-slides mode="ios" pager="ios" #slides class="event-images-slider">
+        <ion-slide>
+          <img
+            *ngIf="highlightImage"
+            #eventImage
+            (load)="imageLoaded()"
+            [src]="baseApiUrl + '/uploads/eventImages/' + highlightImage.fileId"
+            alt=""
+          />
+        </ion-slide>
+        <ion-slide *ngFor="let image of images">
+          <img
+            [src]="baseApiUrl + '/uploads/eventImages/' + image.fileId"
+            alt=""
+          />
+        </ion-slide>
+      </ion-slides>
+    </div>
   </div>
-  <ion-modal
+
+  <div class="details">
+    <event-detail-modal
+      [event]="event"
+      (registerClicked)="registerClicked()"
+      [registration]="eventRegistration"
+    ></event-detail-modal>
+  </div>
+  <!-- <ion-modal
     *ngIf="breakpoint != null && initBreakpoint != null"
     #modal
     trigger="open-modal"
@@ -40,8 +43,7 @@
   >
     <ng-template>
       <ion-content class="ion-padding">
-        <event-detail-modal [event]="event"></event-detail-modal>
       </ion-content>
     </ng-template>
-  </ion-modal>
+  </ion-modal> -->
 </ion-content>

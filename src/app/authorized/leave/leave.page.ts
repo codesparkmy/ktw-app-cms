@@ -17,21 +17,20 @@ import {
 import { Subscription } from 'rxjs';
 import { LeaveApiService } from 'src/app/services/apis/leave.api.service';
 import { PubSubService } from 'src/app/services/internal/pub-sub.service';
-import {format} from 'date-fns'
+import { format } from 'date-fns';
 
 @Component({
   selector: 'app-leave',
   templateUrl: './leave.page.html',
   styleUrls: ['./leave.page.scss'],
 })
-export class LeavePage implements OnInit, AfterViewInit, OnDestroy {
+export class LeavePage implements OnInit {
   @ViewChild('progress') progress;
   @ViewChild('header') header;
   breakpoint = null;
   initBreakpoint = null;
   start = null;
   end = null;
-  menuSubscriber?: Subscription;
   requestLeave = [
     {
       leaveType: 'Annual',
@@ -52,14 +51,14 @@ export class LeavePage implements OnInit, AfterViewInit, OnDestroy {
       reason: 'I would like to take out some days.',
       status: 'rejected',
       dateStart: format(new Date(2022, 5, 9), 'd MMM yyyy'),
-      dateEnd: format(new Date(2022, 5, 13), 'd MMM yyyy')
+      dateEnd: format(new Date(2022, 5, 13), 'd MMM yyyy'),
     },
     {
       leaveType: 'Emergency',
       reason: 'I would like to take out some days.',
       status: 'pending',
       dateStart: format(new Date(2022, 5, 9), 'd MMM yyyy'),
-      dateEnd: format(new Date(2022, 5, 12), 'd MMM yyyy')
+      dateEnd: format(new Date(2022, 5, 12), 'd MMM yyyy'),
     },
   ];
   leaveTypes = [
@@ -93,47 +92,37 @@ export class LeavePage implements OnInit, AfterViewInit, OnDestroy {
     private platform: Platform,
     private pubSub: PubSubService,
     private leaveApiService: LeaveApiService,
-    private router:Router
+    private router: Router
   ) {}
 
   ngOnInit() {
     this.leaveApiService.getSummaries().then((res) => {
       this.leaveTypes = res.data;
-      console.log(this.leaveTypes);
     });
 
     this.formatDate();
   }
 
-  formatDate(){
-    for(var i = 0; i < this.requestLeave.length; i++){
-      this.requestLeave[i]["endDate"]  = format(new Date(this.requestLeave[i].dateEnd), 'd MMM');
-      this.requestLeave[i]["startDate"] = format(new Date(this.requestLeave[i].dateStart), 'd MMM') ;
+  formatDate() {
+    for (var i = 0; i < this.requestLeave.length; i++) {
+      this.requestLeave[i]['endDate'] = format(
+        new Date(this.requestLeave[i].dateEnd),
+        'd MMM'
+      );
+      this.requestLeave[i]['startDate'] = format(
+        new Date(this.requestLeave[i].dateStart),
+        'd MMM'
+      );
     }
-    console.log(this.requestLeave);
   }
 
-  ionViewDidEnter() {}
-
-  ngAfterViewInit(): void {}
-
-  ionViewWillLeave() {}
-
-  ngOnDestroy(): void {
-    this.menuSubscriber?.unsubscribe();
-  }
-
-  isScrolling($evnt) {
-    console.log($evnt);
-  }
-
-  edit(data){
+  edit(data) {
     let navigationExtras: NavigationExtras = {
       queryParams: {
-          "data": JSON.stringify(data)
-      }
+        data: JSON.stringify(data),
+      },
     };
-  
-    this.router.navigate(["/members/leave/edit"],  navigationExtras);
+
+    this.router.navigate(['/members/leave/edit'], navigationExtras);
   }
 }

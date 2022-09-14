@@ -14,4 +14,4 @@ platformBrowserDynamic()
   .catch((err) => console.log(err));
 
 // Call the element loader after the platform has been bootstrapped
-defineCustomElements(window);
+// defineCustomElements(window);

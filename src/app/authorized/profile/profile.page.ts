@@ -4,6 +4,9 @@ import { ProfileApiService } from 'src/app/services/apis/profile.api.service';
 import { Camera, CameraResultType } from '@capacitor/camera';
 import { Filesystem, Directory, Encoding } from '@capacitor/filesystem';
 import { environment } from 'src/environments/environment';
+import { PubSubService } from 'src/app/services/internal/pub-sub.service';
+import { StorageService } from 'src/app/services/internal/storage.service';
+import { StorageKeys } from 'src/app/services/storage-keys';
 
 @Component({
   selector: 'app-profile',
@@ -17,7 +20,9 @@ export class ProfilePage implements OnInit {
   baseApiUrl = environment.api_url;
   constructor(
     private profileApiService: ProfileApiService,
-    private toastController: ToastController
+    private toastController: ToastController,
+    private pubSubService: PubSubService,
+    private storageService: StorageService
   ) {}
 
   ngOnInit() {
@@ -64,6 +69,8 @@ export class ProfilePage implements OnInit {
     this.profileApiService.getSelf().then((res) => {
       this.profile = res.data;
       this.profileEdit = this.profile;
+      this.pubSubService.avatar.next(res.data.avatarImage);
+      this.storageService.set(StorageKeys.AVATAR, res.data.avatarImage);
     });
   }
 }

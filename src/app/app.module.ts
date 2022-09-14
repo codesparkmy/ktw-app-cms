@@ -18,6 +18,7 @@ import { MinuteToTimePipe } from './pipes/minute-to-time.pipe';
 import { EventImageApiService } from './services/apis/event-image.api.service';
 import { ProfileApiService } from './services/apis/profile.api.service';
 import { PublicHolidayApiService } from './services/apis/public-holiday.api.service';
+import { EventRegistrationApiService } from './services/apis/event-registration.api.service';
 
 @NgModule({
   declarations: [AppComponent],
@@ -96,6 +97,17 @@ import { PublicHolidayApiService } from './services/apis/public-holiday.api.serv
       useFactory: (pubSubService, storageService) => {
         return new PublicHolidayApiService(
           '/api/public-holidays',
+          pubSubService,
+          storageService
+        );
+      },
+      deps: [PubSubService, StorageService],
+    },
+    {
+      provide: EventRegistrationApiService,
+      useFactory: (pubSubService, storageService) => {
+        return new EventRegistrationApiService(
+          '/api/event-registrations',
           pubSubService,
           storageService
         );

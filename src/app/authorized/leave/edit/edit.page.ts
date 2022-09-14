@@ -19,7 +19,6 @@ export class EditPage implements OnInit {
   ngOnInit() {
     this.route.queryParams.subscribe((params) => {
       this.request = JSON.parse(params['data']);
-      console.log(this.request);
     });
 
     this.startDateString = format(
@@ -37,7 +36,6 @@ export class EditPage implements OnInit {
   }
 
   endDateChanged(value) {
-    console.log(value);
     this.endDateString = format(parseISO(value), 'd MMM yyyy');
   }
 
@@ -53,6 +51,5 @@ export class EditPage implements OnInit {
     this.request["reason"] = this.reason.value;
     this.request["dateStart"] = this.startDateString;
     this.request["dateEnd"] = this.endDateString;
-    console.log(this.request)
   }
 }

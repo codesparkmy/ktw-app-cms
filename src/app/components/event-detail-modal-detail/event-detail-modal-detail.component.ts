@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { EventImageApiService } from 'src/app/services/apis/event-image.api.service';
 import { environment } from 'src/environments/environment';
 
@@ -9,8 +9,13 @@ import { environment } from 'src/environments/environment';
 })
 export class EventDetailModalDetailComponent implements OnInit {
   @Input('event') event;
-
+  @Input('registration') registration;
+  @Output('registerClicked') registerClickedEmitter = new EventEmitter<any>();
   constructor() {}
 
   ngOnInit() {}
+
+  registerClick() {
+    this.registerClickedEmitter.emit();
+  }
 }

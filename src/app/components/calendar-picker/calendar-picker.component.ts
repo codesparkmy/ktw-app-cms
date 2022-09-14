@@ -55,7 +55,6 @@ export class CalendarPickerComponent implements OnInit {
       });
     }
 
-    console.log(this.calendarDates);
   }
 
   constructor(
@@ -94,7 +93,6 @@ export class CalendarPickerComponent implements OnInit {
     }
     var events = await this.getEventsByOutletId();
     var holidays = await this.getPublicHolidays();
-    console.log(events.data);
     this.events = [
       ...events.data.map((z) => {
         z.type = 'event';

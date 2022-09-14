@@ -16,7 +16,7 @@ import { PopupSelectItemsComponent } from '../popup-select-items/popup-select-it
 })
 export class PopupSelectComponent implements OnInit {
   @Input('title') title;
-  @Input('options') options: any[];
+  @Input('options') options: any[] = [];
   @Input('itemTitle') itemTitle;
   @Input('itemValue') itemValue;
   @Input('placeholder') placeholder;
@@ -30,7 +30,6 @@ export class PopupSelectComponent implements OnInit {
 
   @Input('selected')
   set selected(value: any) {
-    console.log(value);
     if (this.itemValue) {
       var found = this.options.find((z) => z[this.itemValue] == value);
       if (found) {

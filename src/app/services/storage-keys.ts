@@ -8,4 +8,5 @@ export enum StorageKeys {
   'USERPROFILE' = 'USERPROFILE',
   'USERADORG' = 'USERADORG',
   'LASTSYNCTIME' = 'LASTSYNCTIME',
+  'AVATAR' = 'AVATAR',
 }

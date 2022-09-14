@@ -1,18 +1,20 @@
 .multiLineText {
   border: 1px solid #a8a8a8;
-  padding: 10px;
+  padding: 12px 14px;
   border-radius: 10px;
+  margin-top: 0;
 }
 
 .input-title {
-  font-size: 12px;
-  margin-bottom: 2px;
+  font-size: 14px;
+  margin-bottom: 6px;
 }
 
 .camera-container {
   border: 1px solid #a8a8a8;
   display: grid;
   border-radius: 10px;
+  overflow: hidden;
   min-height: 250px;
 }
 
@@ -23,10 +25,12 @@
 
 .calendar-container {
   border: 1px solid #a8a8a8;
+  min-height: 47px;
   display: grid;
   border-radius: 10px;
   align-items: center;
   padding: 5px;
+  padding-left: 14px;
   grid-template-columns: 3fr 1fr;
 }
 
@@ -55,4 +59,18 @@
   align-self: center;
   font-size: 16px;
   line-height: 35px;
+}
+
+.type-leave {
+  --selected-font-family: "Roboto" !important;
+  --selected-font-weight: 400;
+}
+
+.error-message {
+  text-align: center;
+  color: rgb(238, 40, 40);
+  font-family: "Poppins";
+  font-size: 16px;
+  padding: 0 16px;
+  margin-bottom: 16px;
 }

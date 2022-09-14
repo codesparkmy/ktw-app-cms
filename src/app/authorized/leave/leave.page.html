@@ -29,71 +29,51 @@
   <div class="wrapper-leave-list">
     <div class="wrapper-leave-header pl-4 pr-4">
       <div class="title-modal mt-4">Leave Requests</div>
-      <!-- <div
-        class="apply-leave-btn ion-activatable"
-        [routerLink]="[ '/members/apply-leave' ]"
-      >
-        <ion-ripple-effect type="bounded"></ion-ripple-effect>
-        <p>
-          <ion-icon name="add-circle-outline"></ion-icon>
-          Apply for Leave
-        </p>
-      </div> -->
     </div>
-    <div class="wrapper-leave-status" *ngFor="let request of requestLeave">
+    <div class="wrapper-leave-status" *ngFor="let request of leaves">
       <div
-        class="leave leave-reject"
-        *ngIf="request.status == 'rejected'; else approved"
+        class="leave"
+        [ngClass]="{'leave-reject': request.isRejected, 'leave-approve' : request.isApproved , 'leave-pending' : !request.isApproved && !request.isRejected}"
       >
         <div class="box-date">
-          <p>{{request.startDate}} - {{request.endDate}}</p>
+          <p>
+            {{request.fromDate | date : 'd MMM'}} - {{request.toDate | date : 'd
+            MMM'}}
+          </p>
         </div>
         <div class="leave-details">
-          <div class="leave-type">{{request.leaveType}}</div>
+          <div class="leave-type">{{request.type}}</div>
           <div class="reason-leave">{{request.reason}}</div>
           <div class="leave-status">
-            <ion-icon class="status-icon" name="close-circle-outline"></ion-icon>
-            <p class="status-text">{{request.status}}</p>
+            <ion-icon
+              class="status-icon"
+              name="close-circle-outline"
+              *ngIf="request.isRejected"
+            ></ion-icon>
+            <ion-icon
+              class="status-icon"
+              name="checkmark-circle-outline"
+              *ngIf="request.isApproved"
+            ></ion-icon>
+            <p class="status-text" *ngIf="request.isApproved">Approved</p>
+            <p class="status-text" *ngIf="request.isRejected">Rejected</p>
+            <p
+              class="status-text"
+              *ngIf="!request.isApproved && !request.isRejected"
+            >
+              Pending
+            </p>
           </div>
         </div>
       </div>
-      <ng-template #approved>
-        <div
-          class="leave leave-approve"
-          *ngIf="request.status == 'approved'; else pending"
-        >
-          <div class="box-date">
-            <p>{{request.startDate}} - {{request.endDate}}</p>
-          </div>
-          <div class="leave-details">
-            <div class="leave-type">{{request.leaveType}}</div>
-            <div class="reason-leave">{{request.reason}}</div>
-            <div class="leave-status">
-              <ion-icon class="status-icon" name="checkmark-circle-outline"></ion-icon>
-              <p class="status-text">{{request.status}}</p>
-            </div>
-          </div>
-        </div>
-      </ng-template>
-      <ng-template #pending>
-        <div class="leave leave-pending" (click)="edit(request)">
-          <div class="box-date">
-            <p>{{request.startDate}} - {{request.endDate}}</p>
-          </div>
-          <div class="leave-details">
-            <div class="leave-type">{{request.leaveType}}</div>
-            <div class="reason-leave">{{request.reason}}</div>
-            <div class="leave-status">
-              <ion-icon class="status-icon" name="time-outline"></ion-icon>
-              <p class="status-text">{{request.status}}</p>
-            </div>
-          </div>
-        </div>
-      </ng-template>
     </div>
   </div>
   <ion-fab vertical="bottom" horizontal="end" slot="fixed">
-    <ion-fab-button color="custom" translucent [routerLink]="[ '/members/apply-leave' ]">
+    <ion-fab-button
+      color="custom"
+      translucent
+      [routerLink]="[ '/members/apply-leave' ]"
+    >
       <ion-icon name="add"></ion-icon>
     </ion-fab-button>
   </ion-fab>

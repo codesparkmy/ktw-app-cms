@@ -54,7 +54,6 @@ export class CalendarPickerComponent implements OnInit {
         return false;
       });
     }
-
   }
 
   constructor(
@@ -67,15 +66,22 @@ export class CalendarPickerComponent implements OnInit {
     this.fillMonth();
   }
 
-  async fillMonth() {
+  async fillMonth(month?, year?) {
     this.calendarDates = [];
     var startDay = new Date().getDate();
+
     var today = new Date();
+    if (month && year) {
+      if (today.getMonth() + 1 != month || today.getFullYear() != year) {
+        today = new Date(year, month - 1, 1);
+      }
+    }
+
     var firstDayOfMonth = new Date(today.getFullYear(), today.getMonth(), 1);
     var lastDayOfMonth = new Date(today.getFullYear(), today.getMonth() + 1, 0);
 
     var dateStart = 0;
-    for (let index = 0; dateStart <= lastDayOfMonth.getDate(); index++) {
+    for (let index = 0; dateStart < lastDayOfMonth.getDate(); index++) {
       if (index >= firstDayOfMonth.getDay()) {
         this.calendarDates.push({
           label: dateStart + 1,
@@ -91,8 +97,16 @@ export class CalendarPickerComponent implements OnInit {
         });
       }
     }
-    var events = await this.getEventsByOutletId();
-    var holidays = await this.getPublicHolidays();
+    var events = await this.getEventsByOutletId(
+      today.getMonth() + 1,
+      today.getFullYear()
+    );
+
+    var holidays = await this.getPublicHolidays(
+      today.getMonth() + 1,
+      today.getFullYear()
+    );
+
     this.events = [
       ...events.data.map((z) => {
         z.type = 'event';
@@ -111,16 +125,16 @@ export class CalendarPickerComponent implements OnInit {
     ];
   }
 
-  async getEventsByOutletId() {
+  async getEventsByOutletId(month, year) {
     return this.eventApiService.getEventByMonth(
       (await this.storageService.decodeToken()).outlet,
-      9,
-      2022
+      month,
+      year
     );
   }
 
-  getPublicHolidays() {
-    return this.publicHolidaysService.getByMonthAndYear(9, 2022);
+  getPublicHolidays(month, year) {
+    return this.publicHolidaysService.getByMonthAndYear(month, year);
   }
 
   dateClicked(i) {
@@ -130,5 +144,10 @@ export class CalendarPickerComponent implements OnInit {
 
   closeDateTimeModal() {
     this.dateTimeModal.dismiss();
+  }
+
+  monthChanged($event) {
+    var date = new Date($event.detail.value);
+    this.fillMonth(date.getMonth() + 1, date.getFullYear());
   }
 }

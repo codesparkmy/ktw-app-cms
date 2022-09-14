@@ -1,8 +1,14 @@
 import { Component, OnInit } from '@angular/core';
-import { NavController, ToastController } from '@ionic/angular';
+import {
+  AlertController,
+  NavController,
+  ToastController,
+} from '@ionic/angular';
 import { format, parseISO } from 'date-fns';
 import { Camera, CameraResultType } from '@capacitor/camera';
 import { LeaveApiService } from 'src/app/services/apis/leave.api.service';
+import { ActivatedRoute } from '@angular/router';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-apply-leave',
@@ -22,6 +28,7 @@ export class ApplyLeavePage implements OnInit {
     endDateString: null,
     reason: '',
   };
+  isEditing = false;
 
   get typeSelected() {
     if (this.form.leaveType) {
@@ -36,6 +43,7 @@ export class ApplyLeavePage implements OnInit {
     }
     return false;
   }
+
   get errorMessage() {
     if (
       !this.form.leaveType ||
@@ -55,13 +63,29 @@ export class ApplyLeavePage implements OnInit {
   constructor(
     private navCtrl: NavController,
     private leaveApiService: LeaveApiService,
-    private toastController: ToastController
+    private toastController: ToastController,
+    private activatedRoute: ActivatedRoute,
+    private alertController: AlertController
   ) {}
 
   ngOnInit() {
     this.leaveApiService.getSummaries().then((res) => {
       this.leaveTypes = res.data;
     });
+
+    this.leaveApiService
+      .getOne(this.activatedRoute.snapshot.params.id)
+      .then((res) => {
+        this.form = {
+          startDateString: new Date(res.data.fromDate),
+          endDateString: new Date(res.data.toDate),
+          leaveType: res.data.type,
+          reason: res.data.reason,
+        };
+        this.isEditing = true;
+        this.attachment =
+          environment.api_url + '/uploads/leaves/' + res.data.attachment;
+      });
   }
 
   backClicked() {
@@ -87,14 +111,15 @@ export class ApplyLeavePage implements OnInit {
   }
 
   openGallery() {
-    Camera.getPhoto({
-      quality: 90,
-      allowEditing: true,
-      resultType: CameraResultType.DataUrl,
-    }).then((res) => {
-      this.attachment = res.dataUrl;
-      this.attachmentFormat = res.format;
-    });
+    if (!this.isEditing)
+      Camera.getPhoto({
+        quality: 90,
+        allowEditing: true,
+        resultType: CameraResultType.DataUrl,
+      }).then((res) => {
+        this.attachment = res.dataUrl;
+        this.attachmentFormat = res.format;
+      });
   }
 
   applyLeave() {
@@ -125,5 +150,34 @@ export class ApplyLeavePage implements OnInit {
       toast.present();
       this.navCtrl.navigateBack('/members/leave');
     });
+  }
+
+  async cancelLeave() {
+    var alert = await this.alertController.create({
+      message: 'Are you sure to cancel this leave?',
+      header: 'Cancel Leave',
+      buttons: [
+        {
+          text: 'Yes',
+          handler: () => {
+            this.leaveApiService
+              .cancelLeave(this.activatedRoute.snapshot.params.id)
+              .then(async (res) => {
+                var toast = await this.toastController.create({
+                  message: 'Leave application has been cancelled',
+                  duration: 4000,
+                });
+                toast.present();
+                this.navCtrl.navigateBack('/members/leave');
+              });
+          },
+        },
+        {
+          text: 'No',
+          handler: () => {},
+        },
+      ],
+    });
+    alert.present();
   }
 }

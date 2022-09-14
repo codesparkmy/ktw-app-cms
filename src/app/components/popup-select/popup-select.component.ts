@@ -20,7 +20,7 @@ export class PopupSelectComponent implements OnInit {
   @Input('itemTitle') itemTitle;
   @Input('itemValue') itemValue;
   @Input('placeholder') placeholder;
-
+  @Input('disabled') disabled = null;
   private _selected: any;
 
   get selected(): any {
@@ -53,28 +53,31 @@ export class PopupSelectComponent implements OnInit {
 
   constructor(private modalController: ModalController, private zone: NgZone) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+  }
 
   async openModal() {
-    var modal = await this.modalController.create({
-      component: PopupSelectItemsComponent,
-      showBackdrop: true,
-      cssClass: 'popup-select-items',
-      componentProps: {
-        modalTitle: this.title,
-        options: this.options,
-        itemTitle: this.itemTitle,
-        itemValue: this.itemValue,
-        selected: this._selected,
-      },
-    });
-    modal.present();
+    if (this.disabled == null || this.disabled == false) {
+      var modal = await this.modalController.create({
+        component: PopupSelectItemsComponent,
+        showBackdrop: true,
+        cssClass: 'popup-select-items',
+        componentProps: {
+          modalTitle: this.title,
+          options: this.options,
+          itemTitle: this.itemTitle,
+          itemValue: this.itemValue,
+          selected: this._selected,
+        },
+      });
+      modal.present();
 
-    modal.onDidDismiss().then((res) => {
-      if (res.role == 'selected') {
-        this.selected = res.data;
-        this.onSelectEmitter.emit(this.selected);
-      }
-    });
+      modal.onDidDismiss().then((res) => {
+        if (res.role == 'selected') {
+          this.selected = res.data;
+          this.onSelectEmitter.emit(this.selected);
+        }
+      });
+    }
   }
 }

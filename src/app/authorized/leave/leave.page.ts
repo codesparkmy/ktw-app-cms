@@ -52,12 +52,6 @@ export class LeavePage implements OnInit {
   }
 
   edit(data) {
-    let navigationExtras: NavigationExtras = {
-      queryParams: {
-        data: JSON.stringify(data),
-      },
-    };
-
-    this.router.navigate(['/members/leave/edit'], navigationExtras);
+    this.router.navigate(['/members/apply-leave', data.id]);
   }
 }

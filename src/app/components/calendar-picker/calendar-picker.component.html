@@ -19,7 +19,7 @@
       </div>
     </ion-datetime-button>
     <ion-modal
-    #dateTimeModal
+      #dateTimeModal
       [keepContentsMounted]="true"
       style="--width: 90%"
       [isOpen]="isDateTimeModalOpen"
@@ -31,10 +31,11 @@
           color="warning"
           [(ngModel)]="currentMonth"
           presentation="month-year"
+          (ionChange)="monthChanged($event)"
           id="datetime"
         ></ion-datetime>
         <ion-button
-          style="margin: 10px 40px"
+          style="margin: 10px 40px; --color: black"
           fill="none"
           color="primary"
           (click)="closeDateTimeModal()"

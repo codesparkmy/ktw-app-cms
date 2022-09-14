@@ -13,6 +13,16 @@ export class LeaveApiService extends BaseApiService {
     super(subUrl, pubSubService, storageService);
   }
 
+  async cancelLeave(id: any) {
+    await this.init();
+    return await this.axiosInstance.delete('delete/' + id);
+  }
+
+  async getOne(id) {
+    await this.init();
+    return await this.axiosInstance.get('one/' + id);
+  }
+  
   async getSummaries() {
     await this.init();
     return this.axiosInstance.get('self/summary');

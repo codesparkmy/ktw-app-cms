@@ -9,9 +9,10 @@
       [(selected)]="form.leaveType"
       itemValue="type"
       itemTitle="type"
+      [disabled]="isEditing"
       [options]="leaveTypes"
     ></popup-select>
-    <p *ngIf="typeSelected" class="mt-2">
+    <p *ngIf="typeSelected && !isEditing" class="mt-2">
       {{typeSelected?.days}} days remaining
     </p>
   </div>
@@ -21,15 +22,18 @@
         <p class="input-title">STARTS AT</p>
         <div class="calendar-container" id="open-start-calendar">
           <ion-text class="text-date">
-            {{form.startDateString | date}}</ion-text
-          >
+            {{form.startDateString | date}}
+          </ion-text>
           <ion-icon
             class="calendar-icon"
             datetime="datetime"
             name="calendar-number-outline"
           ></ion-icon>
         </div>
-        <ion-modal class="modal-calendar" trigger="open-start-calendar">
+        <ion-modal
+          class="modal-calendar"
+          [trigger]="isEditing ? '' : 'open-start-calendar'"
+        >
           <ng-template>
             <ion-content class="content-calendar">
               <ion-datetime
@@ -53,7 +57,10 @@
             name="calendar-number-outline"
           ></ion-icon>
         </div>
-        <ion-modal class="modal-calendar" trigger="open-end-calendar">
+        <ion-modal
+          class="modal-calendar"
+          [trigger]="isEditing ? '' : 'open-end-calendar'"
+        >
           <ng-template>
             <ion-content class="content-calendar">
               <ion-datetime
@@ -76,6 +83,7 @@
     <p class="input-title">REASONS</p>
     <ion-textarea
       [(ngModel)]="form.reason"
+      [readonly]="isEditing"
       class="multiLineText"
       rows="10"
     ></ion-textarea>
@@ -91,10 +99,11 @@
       ></ion-icon>
     </div>
   </div>
-  <div class="error-message" *ngIf="errorMessage">
+  <div class="error-message" *ngIf="errorMessage && !isEditing">
     <p>{{errorMessage}}</p>
   </div>
   <div
+    *ngIf="!isEditing"
     class="action-btn ion-activatable"
     (click)="applyLeave()"
     [ngClass]="{'disabled': !canApply}"
@@ -106,5 +115,13 @@
     <ng-template #unableApplyTemp>
       <p>Unable to Apply</p>
     </ng-template>
+  </div>
+  <div
+    *ngIf="isEditing"
+    class="action-btn ion-activatable"
+    (click)="cancelLeave()"
+  >
+    <ion-ripple-effect type="bounded"></ion-ripple-effect>
+    <p>Cancel Leave</p>
   </div>
 </ion-content>

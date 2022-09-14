@@ -30,7 +30,11 @@
     <div class="wrapper-leave-header pl-4 pr-4">
       <div class="title-modal mt-4">Leave Requests</div>
     </div>
-    <div class="wrapper-leave-status" *ngFor="let request of leaves">
+    <div
+      class="wrapper-leave-status"
+      *ngFor="let request of leaves"
+      (click)="edit(request)"
+    >
       <div
         class="leave"
         [ngClass]="{'leave-reject': request.isRejected, 'leave-approve' : request.isApproved , 'leave-pending' : !request.isApproved && !request.isRejected}"

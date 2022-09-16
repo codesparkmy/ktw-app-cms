@@ -1,4 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { EventImageApiService } from 'src/app/services/apis/event-image.api.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'event-big-card',
@@ -7,7 +9,25 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 export class EventBigCardComponent implements OnInit {
   @Input('event') event;
-  constructor() {}
+  eventImage = '';
+  baseApiUrl = environment.api_url;
+  highlightImage = null;
 
-  ngOnInit() {}
+  constructor(private eventImageApiService: EventImageApiService) {}
+
+  ngOnInit() {
+    console.log(this.event);
+
+    this.eventImageApiService
+      .getEventImagesByEventId(this.event?.id)
+      .then((res) => {
+        console.log(res)
+        this.highlightImage = res.data.find(
+          (z) => z.id == this.event.highlightImage
+        );
+        console.log(this.highlightImage?.fileId);
+        this.eventImage = this.baseApiUrl + '/uploads/eventImages/' + this.highlightImage?.fileId
+      });
+
+  }
 }

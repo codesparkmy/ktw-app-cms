@@ -1,0 +1,59 @@
+<ion-content>
+  <top-bar-header back backBlack (backClicked)="backClicked()"></top-bar-header>
+  <p class="pl-16 page-title mt-16">Revenue</p>
+  <div class="px-4 mt-3 mb-15">
+    <p class="input-title">TYPE OF TRANSACTION</p>
+    <popup-select
+      class="type-leave"
+      title="Type of Transaction"
+      [(selected)]="form.transactionType"
+      itemValue="type"
+      itemTitle="type"
+      [disabled]="isEditing"
+      [options]="transactionType"
+      placeholder="Type of Transaction"
+    ></popup-select>
+  </div>
+  <div class="px-4 mt-3 mb-15">
+    <p class="input-title">TYPE OF ITEM</p>
+    <popup-select
+      class="type-leave"
+      title="Type of Item"
+      [(selected)]="form.itemType"
+      itemValue="type"
+      itemTitle="type"
+      [disabled]="isEditing"
+      [options]="itemType"
+      placeholder="Type of Item"
+    ></popup-select>
+  </div>
+  <div class="px-4 mt-3 mb-15">
+    <p class="input-title">ATTACHMENT (Optional)</p>
+    <div class="camera-container" (click)="openGallery()">
+      <img [src]="attachment" *ngIf="attachment" />
+      <ion-icon
+        class="camera-icon"
+        name="camera-outline"
+        *ngIf="!attachment"
+      ></ion-icon>
+    </div>
+  </div>
+  <div class="error-message" *ngIf="errorMessage && !isEditing">
+    <p>{{errorMessage}}</p>
+  </div>
+  <div
+    *ngIf="!isEditing"
+    class="action-btn ion-activatable"
+    (click)="applyRevenue()"
+    [ngClass]="{'disabled': !canApply}"
+  >
+    <ion-ripple-effect type="bounded"></ion-ripple-effect>
+    <ng-container *ngIf="canApply; else unableApplyTemp">
+      <p>Apply</p>
+    </ng-container>
+    <ng-template #unableApplyTemp>
+      <p>Unable to Apply</p>
+    </ng-template>
+  </div>
+ 
+</ion-content>

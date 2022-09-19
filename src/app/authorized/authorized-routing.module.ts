@@ -73,6 +73,11 @@ const routes: Routes = [
             (m) => m.ApplyLeavePageModule
           ),
       },
+      {
+        path: 'revenue',
+        loadChildren: () =>
+          import('./revenue/revenue.module').then((m) => m.RevenuePageModule),
+      },
     ],
   },
 ];
